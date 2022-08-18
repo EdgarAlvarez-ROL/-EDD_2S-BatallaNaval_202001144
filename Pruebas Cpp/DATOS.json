@@ -1,0 +1,22 @@
+{
+"usuarios": [
+{ "nick": "JUAN", "password": "1", "monedas": "1", "edad": "11" },
+{ "nick": "PABLO", "password": "2", "monedas": "2", "edad": "22" },
+{ "nick": "JOSE", "password": "3", "monedas": "3", "edad": "33" },
+{ "nick": "Edgar", "password": "44", "monedas": "4", "edad": "44" }
+],
+"articulos": [
+{ "id": "CAJA0", "categoria": "NORMAL", "precio": "1", "nombre": "caja", "src": "s" },
+{ "id": "CAJA1", "categoria": "NORMAL", "precio": "2", "nombre": "caja", "src": "s" },
+{ "id": "CAJA2", "categoria": "NORMAL", "precio": "3", "nombre": "caja", "src": "s" }
+],
+"tutorial": {
+"ancho":"4",
+"alto":"4",
+"movimientos":[
+{ "x": "1", "y": "2" },
+{ "x": "3", "y": "4" },
+{ "x": "5", "y": "6" }
+]
+}
+}
