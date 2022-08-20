@@ -1,9 +1,9 @@
 {
 "usuarios": [
-{ "nick": "JUAN", "password": "1", "monedas": "1", "edad": "11" },
-{ "nick": "PABLO", "password": "2", "monedas": "2", "edad": "22" },
-{ "nick": "JOSE", "password": "3", "monedas": "3", "edad": "33" },
-{ "nick": "Edgar", "password": "44", "monedas": "4", "edad": "44" }
+{ "nick": "JUAN", "password": "juan", "monedas": "1", "edad": "11" },
+{ "nick": "pablo", "password": "pablo", "monedas": "2", "edad": "22" },
+{ "nick": "jose", "password": "jose", "monedas": "3", "edad": "33" },
+{ "nick": "edgar", "password": "jose", "monedas": "4", "edad": "44" }
 ],
 "articulos": [
 { "id": "CAJA0", "categoria": "NORMAL", "precio": "1", "nombre": "caja", "src": "s" },

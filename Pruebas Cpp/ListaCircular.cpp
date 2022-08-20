@@ -18,15 +18,28 @@ void ListaCircular::InsertarFinal(PersonaA p1) {
     nodocircu*nuevo = new nodocircu();
     nuevo->p1 = p1;
 
-    if(Inicio == NULL){
+    if (Inicio == NULL){
         Inicio = nuevo;
-        Inicio->sig = Inicio;
-        Ultimo  = Inicio;
+        Inicio->sig = NULL;
+        Inicio->atras = NULL;
+        Ultimo = Inicio;
     }else{
         Ultimo->sig = nuevo;
-        nuevo->sig = Inicio;
+        nuevo->sig = NULL;
+        nuevo->atras = Ultimo;
         Ultimo = nuevo;
     }
+
+    /* Este es de Lista Simple*/
+    // if(Inicio == NULL){
+    //     Inicio = nuevo;
+    //     Inicio->sig = Inicio;
+    //     Ultimo  = Inicio;
+    // }else{
+    //     Ultimo->sig = nuevo;
+    //     nuevo->sig = Inicio;
+    //     Ultimo = nuevo;
+    // }
 }
 
 
@@ -37,11 +50,20 @@ void ListaCircular::Imprimir() {
     int i;
     i=0;
     if (Inicio != NULL){
-        do{
+        
+        while(actual != NULL){
             cout << "\n "<< i << " " << (actual->p1).getNombre();
             actual = actual->sig;
-            i = i + 1;
-        }while(actual != Inicio);
+            i = i+1;
+        }
+        
+        
+        /*Lista Doble Simple*/
+        // do{
+        //     cout << "\n "<< i << " " << (actual->p1).getNombre();
+        //     actual = actual->sig;
+        //     i = i + 1;
+        // }while(actual != Inicio);
     }else{
         cout << "LA LISTA ESTA VACIA";
     }
@@ -56,8 +78,8 @@ void ListaCircular::ModificarUsuario(int numberUser, string contrass) {
     int i;
     i = 0;
     if (Inicio != NULL){
-        do{
-            // cout << "\n " << (actual->p1).getNombre();
+
+          while(actual != NULL){
             if (numberUser == i && contrass == ((actual->p1).getPassword())){
                 cout << "\n\nIngrese su nuevo Nick: ";
                 string newNick;
@@ -73,9 +95,9 @@ void ListaCircular::ModificarUsuario(int numberUser, string contrass) {
                 (actual->p1).setPassword(newPass);
 
                 cout << "Usuario Modificado Exitosamente";
-                cout << "Nombre: " << (actual->p1).getNombre();
-                cout << "Edad: " << (actual->p1).getEdad();
-                cout << "Password: ****** " ;
+                cout << "\nNombre: " << (actual->p1).getNombre();
+                cout << "\nEdad: " << (actual->p1).getEdad();
+                cout << "\nPassword: *********** " ;
                 
             }
             else{
@@ -83,8 +105,100 @@ void ListaCircular::ModificarUsuario(int numberUser, string contrass) {
                 // cout << "Contraseña y/o Usuario Incorrecto \n";
             }
             actual = actual->sig;
+        }
+        
+
+        // do{
+        //     // cout << "\n " << (actual->p1).getNombre();
+        //     if (numberUser == i && contrass == ((actual->p1).getPassword())){
+        //         cout << "\n\nIngrese su nuevo Nick: ";
+        //         string newNick;
+        //         cin >> newNick;
+        //         cout << "Ingrese su nueva Edad: ";
+        //         int newEdad;
+        //         cin >> newEdad;
+        //         cout << "Ingrese su nueva Password: ";
+        //         string newPass;
+        //         cin >> newPass;
+        //         (actual->p1).setNombre(newNick);
+        //         (actual->p1).setEdad(newEdad);
+        //         (actual->p1).setPassword(newPass);
+
+        //         cout << "Usuario Modificado Exitosamente";
+        //         cout << "Nombre: " << (actual->p1).getNombre();
+        //         cout << "Edad: " << (actual->p1).getEdad();
+        //         cout << "Password: ****** " ;
+                
+        //     }
+        //     else{
+        //         i = i+1;
+        //         // cout << "Contraseña y/o Usuario Incorrecto \n";
+        //     }
+        //     actual = actual->sig;
             
-        }while(actual != Inicio);
+        // }while(actual != Inicio);
+    }else{
+        cout << "LA LISTA ESTA VACIA";
+    }
+ 
+}
+
+
+
+void ListaCircular::EliminarUsuario(int numberUser, string contrass) {
+    // nodocircu*aux = Inicio;
+    nodocircu*actual = new nodocircu();
+    actual = Inicio;
+
+    nodocircu*anterior = new nodocircu();
+    anterior = NULL;
+
+    int i;
+    i = 0;
+
+    bool encontrado = false;
+    if (Inicio != NULL){
+
+          while(actual != NULL && encontrado!=true){
+
+            if (numberUser == i && contrass == ((actual->p1).getPassword())){
+                cout << "Usuario Encontrado\n";
+                cout << "DESEA ELIMINAR SU CUENTA [y/n]: ";
+                string confirmacion;
+                cin >> confirmacion;
+                if (confirmacion == "y"){
+                      if (actual == Inicio){
+                        Inicio = Inicio->sig;
+                        Inicio->atras = NULL;
+                    }else if (actual == Ultimo){
+                        anterior->sig = NULL;
+                        Ultimo = anterior;
+                    }else{
+                        anterior->sig = actual->sig;
+                        actual->sig->atras = anterior;
+                    }
+
+                    cout << "\n Usuario Eliminado \n";
+                    encontrado = true;
+                }else if (confirmacion == "n"){
+                    cout << "\n Usuario NO Eliminado \n";
+                    encontrado = true;
+                }else{
+                    cout << "\nIngrese [y/n] porfavor";
+                    encontrado = true;
+                }
+                
+                  
+                    // encontrado = true;
+            }
+            else{
+                i = i+1;
+                // cout << "Contraseña y/o Usuario Incorrecto \n";
+            }
+            anterior = actual;
+            actual = actual->sig;
+        }
+        
     }else{
         cout << "LA LISTA ESTA VACIA";
     }

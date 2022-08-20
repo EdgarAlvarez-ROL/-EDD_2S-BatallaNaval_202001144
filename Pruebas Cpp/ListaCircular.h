@@ -36,6 +36,7 @@ public:
     // void InsertarEnOrden(PersonaA p1);
     void Imprimir();
     void ModificarUsuario(int numberUser,  string contrass);
+    void EliminarUsuario(int numberUser,  string contrass);
 private:
 };
 

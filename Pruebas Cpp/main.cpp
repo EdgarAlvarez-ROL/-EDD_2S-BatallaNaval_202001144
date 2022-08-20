@@ -179,6 +179,8 @@ int main()
                 break;
                 }
             case 3:{
+                int numberUser;
+                string contrass;
                 cout << " 3. Login \n";
                 cout << "   a. Editar Informacion \n";
                 cout << "   b. Eliminar Cuenta \n";
@@ -194,11 +196,9 @@ int main()
                 {
                 case 'a':{
                     listaCircu.Imprimir();
-                    cout << "\nIngrese su numero de usuario: \n";
-                    int numberUser;
+                    cout << "\nIngrese su numero de usuario: ";
                     cin >> numberUser;
                     cout << "Ingrese su contraseña: ";
-                    string contrass;
                     cin >> contrass;
 
                     listaCircu.ModificarUsuario(numberUser,contrass);
@@ -206,17 +206,26 @@ int main()
 
                     break;
                     }
-                case 'b':
+                case 'b':{
+                    listaCircu.Imprimir();
+                    cout << "\nIngrese su numero de usuario: ";
+                    cin >> numberUser;
+                    cout << "Ingrese su contraseña: ";
+                    cin >> contrass;
+                    listaCircu.EliminarUsuario(numberUser, contrass);
                     break;
+                    }
                 case 'c':
+                cout << "e";
                     break;
                 case 'd':
+                cout << "d";
                     break;
                 case 'e':
-                    cout << "a";
+                    cout << "e";
                     break;
                 case 'f':
-                    cout << "a";
+                    // cout << "a";
                     break;
                 
                 

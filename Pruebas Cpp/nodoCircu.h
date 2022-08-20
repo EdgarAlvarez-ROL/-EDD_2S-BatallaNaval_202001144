@@ -23,6 +23,7 @@ public:
 
     
     nodocircu*sig;
+    nodocircu*atras;
 
     PersonaA p1 = PersonaA("",0,0,"");;
     PersonaA p2 = PersonaA("",0,0,"");
@@ -30,6 +31,7 @@ public:
 
     nodocircu() {
         sig = NULL;
+        atras = NULL;
         p1 = p2;
 
         // valor = 0;
