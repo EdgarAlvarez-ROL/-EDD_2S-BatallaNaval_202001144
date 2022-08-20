@@ -31,9 +31,10 @@
 #include <string>
 #include <fstream>
 
-#include "PersonaA.h"
+// #include "PersonaA.h"
 
-// #include "ListaCircular.h"
+#include "ListaCircular.h"
+#include "ListaCircular.cpp"
 
 using namespace std;
 
@@ -58,7 +59,7 @@ int main()
 {
     int opcion = 0;
 
-    // ListaCircular listaCircu;
+    ListaCircular listaCircu;
     
     do
     {
@@ -113,8 +114,9 @@ int main()
                 
                 PersonaA pcua = PersonaA(nickTemp,edadTemp,0,passwordTemp);
                 // Persona pcua(nickTemp,edadTemp,0,passwordTemp);
-                cout << "Usuario Registrado como: " << pcua.getNombre() << " con edad : " << pcua.getEdad() <<  " años inicia con: " << pcua.getMonedas() << " monedas y su contraseña es: " << pcua.getPassword();
-                // listaCircu.InsertarFinal(pcua);
+                cout << "Usuario Registrado como: " << pcua.getNombre() << " con edad : " << pcua.getEdad() <<  " años inicia con: " << pcua.getMonedas() << " monedas y su contraseña es: " << pcua.getPassword() << "\n";
+                listaCircu.InsertarFinal(pcua);
+                listaCircu.Imprimir();
 
                 // ListaSimple pruebas;
                 // pruebas.InsertarFinal(1);

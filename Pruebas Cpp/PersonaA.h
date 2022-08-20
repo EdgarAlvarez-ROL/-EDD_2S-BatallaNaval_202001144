@@ -10,7 +10,16 @@ class PersonaA{
         int monedas;
         std::string password;
 
-    public:// metodos
+      // void metodoPrivado() { std::cout << "Llamada privada dentro de la clase\n"; }
+
+  public:
+    // // Constructor sin argumentos
+    // PersonaA() {
+    //   nombre = "";
+    //   edad = 0;
+    //   monedas = 0;
+    //   password = "";
+    // }
     // Constructor,nos sirve para inicializar los atributos
     PersonaA(std::string _nombre,int _edad,int _monedas, std::string _password){
         this->edad = _edad;

@@ -11,45 +11,60 @@
  * Created on 6 de agosto de 2022, 09:42 AM
  */
 #include "ListaCircular.h"
-#include "PersonaA.h"
+// #include "PersonaA.h"
 
 void ListaCircular::InsertarFinal(PersonaA p1) {
     nodocircu*nuevo = new nodocircu();
     nuevo->p1 = p1;
 
-    if (Inicio == NULL) {
+    if(Inicio == NULL){
         Inicio = nuevo;
-    } else {
-        nodocircu*auxActual = Inicio;
-
-        nuevo->sig  = auxActual->sig;
-        auxActual->sig = nuevo;
-
-        // while (auxActual != NULL) {
-        //     if (auxActual->sig == NULL) {
-        //         auxActual->sig = nuevo;
-        //         break;
-        //     }
-        //     auxActual = auxActual->sig;
-        // }
+        Inicio->sig = Inicio;
+        Ultimo  = Inicio;
+    }else{
+        Ultimo->sig = nuevo;
+        nuevo->sig = Inicio;
+        Ultimo = nuevo;
     }
-
-
 }
 
-void ListaCircular::Imprimir() {
-    nodocircu*aux = Inicio;
+/*
 
-    do {
-      printf("%d -> ", aux->p1);
-      aux = aux->sig;
-    } while(aux != Inicio);
-    printf("\n");
-    // while (aux != NULL) {
-    //     cout <<"[" << aux->p1 << "]->";
-    //     aux = aux->sig;
-    // }
-    // cout << ("NULL");
+void insertartodo(){
+    node nuevo new nodo();
+    cout << Ingrese el dato que contendra el nuevo Nodo:";
+    cin >> nueve->dato;
+    if(primero -- NULL){
+        primero nuevo;
+        primere->siguiente primera;
+        ultimo primera
+                            nuevo;ultima siguiente
+        nuevo->siguiente primeros
+        ultimo nuevo;
+   1
+    cout <<"\nNodo Inbgresade\n\n";
+    Jelse(
+
+*/
+
+void ListaCircular::Imprimir() {
+    // nodocircu*aux = Inicio;
+    nodocircu*actual = new nodocircu();
+    actual = Inicio;
+    if (Inicio != NULL){
+        do{
+            cout << "\n " << (actual->p1).getNombre();
+            actual = actual->sig;
+            
+        }while(actual != Inicio);
+    }else{
+        cout << "LA LISTA ESTA VACIA";
+    }
+    
+
+
+
+    
 }
 
 /*

@@ -16,17 +16,26 @@
 #include <stddef.h>
 #include "PersonaA.h"    
 
+
+
 class nodocircu {
 public:
-    PersonaA p1 = PersonaA("",0,0,"");;
-    
 
+    
     nodocircu*sig;
+
+    PersonaA p1 = PersonaA("",0,0,"");;
+    PersonaA p2 = PersonaA("",0,0,"");
+
+
     nodocircu() {
         sig = NULL;
-        p1 = PersonaA("",0,0,"");
+        p1 = p2;
+
         // valor = 0;
     }
+    
+    
 private:
 };
 #endif /* NODOCIRCU_H */

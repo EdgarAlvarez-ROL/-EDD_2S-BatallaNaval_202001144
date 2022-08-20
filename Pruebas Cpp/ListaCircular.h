@@ -15,7 +15,7 @@
 #define LISTACIRCULAR_H
 
 #include "nodocircu.h"
-#include "PersonaA.h"
+// #include "PersonaA.h"
 
 #include <iostream>
 using namespace std;
@@ -24,14 +24,16 @@ using namespace std;
 
 class ListaCircular {
 public:
-    
+    // PersonaA p1;
     nodocircu*Inicio;
+    nodocircu*Ultimo;
 
     ListaCircular() {
         Inicio = NULL;
+        Ultimo = NULL;
     }
     void InsertarFinal(PersonaA p1);
-    void InsertarEnOrden(PersonaA p1);
+    // void InsertarEnOrden(PersonaA p1);
     void Imprimir();
 private:
 };
