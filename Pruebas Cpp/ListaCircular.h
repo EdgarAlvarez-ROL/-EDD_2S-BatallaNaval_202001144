@@ -1,0 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   ListaCircular.h
+ * Author: Alex Rose
+ *
+ * Created on 6 de agosto de 2022, 09:42 AM
+ */
+
+#ifndef LISTACIRCULAR_H
+#define LISTACIRCULAR_H
+
+#include "nodocircu.h"
+#include "PersonaA.h"
+
+#include <iostream>
+using namespace std;
+
+
+
+class ListaCircular {
+public:
+    
+    nodocircu*Inicio;
+
+    ListaCircular() {
+        Inicio = NULL;
+    }
+    void InsertarFinal(PersonaA p1);
+    void InsertarEnOrden(PersonaA p1);
+    void Imprimir();
+private:
+};
+
+#endif /* ListaCircular_H */
+

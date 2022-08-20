@@ -21,6 +21,8 @@
 /*
  */
 
+// #include "jsoncpp.cpp"
+
 #include <cstdlib>
 #include <iostream>
 
@@ -29,11 +31,9 @@
 #include <string>
 #include <fstream>
 
-// #include "Persona.h"
-// #include "Persona.cpp"
+#include "PersonaA.h"
 
-
-//#include "jsoncpp.cpp"
+// #include "ListaCircular.h"
 
 using namespace std;
 
@@ -52,14 +52,20 @@ int main(int argc, char** argv) {
 }
 */
 
-Persona p2;
+   
 
 int main()
 {
     int opcion = 0;
+
+    // ListaCircular listaCircu;
     
     do
     {
+      
+        // FUNCIONA
+        // pr prueba;
+        // prueba.Mostrar(3);
         cout << "********** MENU **********\n";
         cout << " 1. Carga Masiva \n";
         cout << " 2. Registrar Usuario \n";
@@ -71,7 +77,7 @@ int main()
         cin >> opcion;
         
         
-        cout << "\nUsted a ingresado la opcion: " << opcion << endl;
+        // cout << "\nUsted a ingresado la opcion: " << opcion << endl;
         switch(opcion){
             case 1:               
                 cout << " 1. Carga Masiva \n";
@@ -88,11 +94,35 @@ int main()
                 cout << "\n";
                 break;
             case 2:
-                
+                {
                 cout << " 2. Registrar Usuario \n";
                 //system("pause>nul"); // Pausa
+
+                string nickTemp, passwordTemp;
+                int edadTemp;
+                cout << "Ingrese su Nick: ";
+                cin >> nickTemp;
+
+                cout << "Ingrese su Edad: ";
+                cin >> edadTemp;
+
+                cout << "Ingrese su Password: ";
+                cin >> passwordTemp;
+
+                
+                
+                PersonaA pcua = PersonaA(nickTemp,edadTemp,0,passwordTemp);
+                // Persona pcua(nickTemp,edadTemp,0,passwordTemp);
+                cout << "Usuario Registrado como: " << pcua.getNombre() << " con edad : " << pcua.getEdad() <<  " años inicia con: " << pcua.getMonedas() << " monedas y su contraseña es: " << pcua.getPassword();
+                // listaCircu.InsertarFinal(pcua);
+
+                // ListaSimple pruebas;
+                // pruebas.InsertarFinal(1);
+                
+                
                 cout << "\n";
                 break;
+                }
             case 3:
                 cout << " 3. Login \n";
                 //system("pause>nul"); // Pausa

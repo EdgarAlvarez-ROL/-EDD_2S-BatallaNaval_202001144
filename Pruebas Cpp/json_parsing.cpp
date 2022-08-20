@@ -15,7 +15,6 @@ IINCLUDES NO BORRAR PENDEJO
 // #include <char>
 #include <fstream>
 #include "json_parsing.h"   
-
 using namespace std;
 /*
 IINCLUDES NO BORRAR PENDEJO
@@ -104,7 +103,7 @@ void json_parsing::lector(){
         // cout << edad << endl;
         Persona usuario(nick,edad,monedas,password);
 
-        // cout << usuario.getNombre() << " "  << usuario.getEdad() << " " << usuario.getMonedas() << " " << usuario.getPassword() << endl;
+        cout << usuario.getNombre() << " "  << usuario.getEdad() << " " << usuario.getMonedas() << " " << usuario.getPassword() << endl;
 
     }
     

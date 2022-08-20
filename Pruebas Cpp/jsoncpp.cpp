@@ -70,7 +70,7 @@ license you like.
 
 
 
-
+// using namespace std;
 
 
 #include "json/json.h"
