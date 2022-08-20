@@ -12,6 +12,7 @@
  */
 #include "ListaCircular.h"
 // #include "PersonaA.h"
+// using namespace std;
 
 void ListaCircular::InsertarFinal(PersonaA p1) {
     nodocircu*nuevo = new nodocircu();
@@ -28,80 +29,65 @@ void ListaCircular::InsertarFinal(PersonaA p1) {
     }
 }
 
-/*
-
-void insertartodo(){
-    node nuevo new nodo();
-    cout << Ingrese el dato que contendra el nuevo Nodo:";
-    cin >> nueve->dato;
-    if(primero -- NULL){
-        primero nuevo;
-        primere->siguiente primera;
-        ultimo primera
-                            nuevo;ultima siguiente
-        nuevo->siguiente primeros
-        ultimo nuevo;
-   1
-    cout <<"\nNodo Inbgresade\n\n";
-    Jelse(
-
-*/
 
 void ListaCircular::Imprimir() {
     // nodocircu*aux = Inicio;
     nodocircu*actual = new nodocircu();
     actual = Inicio;
+    int i;
+    i=0;
     if (Inicio != NULL){
         do{
-            cout << "\n " << (actual->p1).getNombre();
+            cout << "\n "<< i << " " << (actual->p1).getNombre();
+            actual = actual->sig;
+            i = i + 1;
+        }while(actual != Inicio);
+    }else{
+        cout << "LA LISTA ESTA VACIA";
+    }
+ 
+}
+
+
+void ListaCircular::ModificarUsuario(int numberUser, string contrass) {
+    // nodocircu*aux = Inicio;
+    nodocircu*actual = new nodocircu();
+    actual = Inicio;
+    int i;
+    i = 0;
+    if (Inicio != NULL){
+        do{
+            // cout << "\n " << (actual->p1).getNombre();
+            if (numberUser == i && contrass == ((actual->p1).getPassword())){
+                cout << "\n\nIngrese su nuevo Nick: ";
+                string newNick;
+                cin >> newNick;
+                cout << "Ingrese su nueva Edad: ";
+                int newEdad;
+                cin >> newEdad;
+                cout << "Ingrese su nueva Password: ";
+                string newPass;
+                cin >> newPass;
+                (actual->p1).setNombre(newNick);
+                (actual->p1).setEdad(newEdad);
+                (actual->p1).setPassword(newPass);
+
+                cout << "Usuario Modificado Exitosamente";
+                cout << "Nombre: " << (actual->p1).getNombre();
+                cout << "Edad: " << (actual->p1).getEdad();
+                cout << "Password: ****** " ;
+                
+            }
+            else{
+                i = i+1;
+                // cout << "Contraseña y/o Usuario Incorrecto \n";
+            }
             actual = actual->sig;
             
         }while(actual != Inicio);
     }else{
         cout << "LA LISTA ESTA VACIA";
     }
-    
-
-
-
-    
+ 
 }
 
-/*
-void ListaCircular::InsertarEnOrden(PersonaA p1) {
-    nodocircu*nuevo = new nodocircu();
-    nuevo->p1 = p1;
-    if (Inicio == NULL) {//Si la lista se encuentra vacia
-        Inicio = nuevo;
-    } else {//si la lista no esta vacia
-        nodocircu*auxActual = Inicio;
-        nodocircu*auxSiguiente;
-        while (auxActual != NULL) {
-            auxSiguiente = auxActual->sig;
-            if (nuevo->p1 < auxActual->p1) {//insertar al inicio de la lista por que es menor
-                nuevo->sig = auxActual;
-                Inicio = nuevo;
-                break;
-            } else if (auxSiguiente == NULL) {//insertar al final de la lista
-                auxActual->sig = nuevo;
-                break;
-            } else if (nuevo->p1 < auxSiguiente->p1) {//insertar en medio de la lista
-                auxActual->sig = nuevo;
-                nuevo->sig = auxSiguiente;
-                break;
-            }
-            auxActual = auxActual->sig;
-        }
-    }
-}
-
-void ListaCircular::Imprimir() {
-    nodocircu*aux = Inicio;
-    while (aux != NULL) {
-        cout <<"[" << aux->p1 << "]->";
-        aux = aux->sig;
-    }
-    cout << ("NULL");
-}
-
-*/

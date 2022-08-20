@@ -16,6 +16,7 @@
  */
 #include "ListaSimple.h"
 #include "ListaSimple.cpp"
+
 #include "json_parsing.h"
 #include "json_parsing.cpp"
 /*
@@ -36,30 +37,77 @@
 #include "ListaCircular.h"
 #include "ListaCircular.cpp"
 
+
+/////////////
+// #include<stdio.h>
+// #include<conio.h>
+
+
 using namespace std;
 
-/*
-int main(int argc, char** argv) {
 
-    ListaSimple pruebas;
-    pruebas.InsertarEnOrden(7);
-    pruebas.InsertarEnOrden(1);
-    pruebas.InsertarEnOrden(4);
-    pruebas.InsertarEnOrden(5);
-    pruebas.InsertarEnOrden(6);
-    pruebas.InsertarEnOrden(8);
-    pruebas.Imprimir();
+// INICIO -Variables GLOBALES
+    ListaCircular listaCircu;
+// FIN    -Variables GLOBALES
+
+int lectorJson(){
+    
+    // Usando el fstream para tomar la ruta del archivo
+    ifstream file("DATOS.json");
+    Json::Value actualJson;
+    Json::Reader reader;
+    
+    // Usando Reader para parsear el Json osea leerlo
+    reader.parse(file, actualJson);
+    
+    // Ahora obtendremos la data del JSON
+    //cout << "Total JSON data: \n" << actualJson << endl;
+    
+    // Ahora obtendremos los datos INDIVIDUALMENTE
+    // Numero de elementos dentro del JSON
+    //cout << "Objeto de la Rama Principal de JSON: " << actualJson.size() << endl;
+    
+    
+    const Json::Value users = actualJson["usuarios"];
+   
+    for(int i = 0; i < users.size(); i = i + 1){
+        //listaUsuarios->
+        /* 
+        * SIRVE NO BORRAR
+        cout << i << endl;
+        cout << users[i]["nick"] << endl;
+        * SIRVE NO BORRAR
+        */
+
+        string nick = users[i]["nick"].asString();
+        
+        string edadTemp = (users[i]["edad"].asString());
+        int edad = std::atoi(edadTemp.c_str());
+
+        string monTemp = (users[i]["monedas"].asString());
+        int monedas = std::atoi(monTemp.c_str());
+        
+        string password = users[i]["password"].asString();
+
+        // cout << edad << endl;
+        PersonaA usuario(nick,edad,monedas,password);
+
+        cout << usuario.getNombre() << " "  << usuario.getEdad() << " " << usuario.getMonedas() << " " << usuario.getPassword() << endl;
+        
+        listaCircu.InsertarFinal(usuario);
+
+    }
+    
+    
     return 0;
 }
-*/
-
    
 
 int main()
 {
     int opcion = 0;
+    char opcionLogin = 'z';
 
-    ListaCircular listaCircu;
     
     do
     {
@@ -74,17 +122,21 @@ int main()
         cout << " 4. Reportes \n";
         cout << " 0. SALIR del juego \n";
 
-        cout << "Ingrese una opcion a ejecutar\n";
+        cout << "Ingrese una opcion a ejecutar: ";
         cin >> opcion;
         
         
         // cout << "\nUsted a ingresado la opcion: " << opcion << endl;
         switch(opcion){
-            case 1:               
+            case 1:   {           
                 cout << " 1. Carga Masiva \n";
                 //
-                json_parsing lectorJson;
-                lectorJson.lector();
+                // json_parsing lectorJson;
+                // lectorJson.lector();
+
+                lectorJson();
+                // Persona lisTEmpPersonas[1000];
+                // Persona lisTEmpPersonas = lectorJson.lector();
                 
                 
             //    g++ main.cpp -o main
@@ -94,6 +146,7 @@ int main()
                 //system("pause>nul"); // Pausa
                 cout << "\n";
                 break;
+                } 
             case 2:
                 {
                 cout << " 2. Registrar Usuario \n";
@@ -125,11 +178,58 @@ int main()
                 cout << "\n";
                 break;
                 }
-            case 3:
+            case 3:{
                 cout << " 3. Login \n";
+                cout << "   a. Editar Informacion \n";
+                cout << "   b. Eliminar Cuenta \n";
+                cout << "   c. Ver el Tutorial \n";
+                cout << "   d. Ver articulos de la tienda \n";
+                cout << "   e. Realizaqr Movimientos \n";
+                cout << "   f. Salir al menu principal \n";
+
+                cout << "Ingrese una opcion a ejecutar\n";
+                cin >> opcionLogin;
+
+                switch (opcionLogin)
+                {
+                case 'a':{
+                    listaCircu.Imprimir();
+                    cout << "\nIngrese su numero de usuario: \n";
+                    int numberUser;
+                    cin >> numberUser;
+                    cout << "Ingrese su contraseña: ";
+                    string contrass;
+                    cin >> contrass;
+
+                    listaCircu.ModificarUsuario(numberUser,contrass);
+                    
+
+                    break;
+                    }
+                case 'b':
+                    break;
+                case 'c':
+                    break;
+                case 'd':
+                    break;
+                case 'e':
+                    cout << "a";
+                    break;
+                case 'f':
+                    cout << "a";
+                    break;
+                
+                
+                default:cout << "Usted ha ingresado una opción incorrecta" << "\n" << endl;
+                    break;
+                }
+                
+
+
                 //system("pause>nul"); // Pausa
                 cout << "\n";
                 break;
+            }
             case 4:
                 cout << " 4. Reportes \n";
                 //system("pause>nul"); // Pausa
@@ -148,8 +248,6 @@ int main()
     // system("PAUSE");
     return 0;
 }
-
-
 
 
 

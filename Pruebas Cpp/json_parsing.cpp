@@ -15,6 +15,10 @@ IINCLUDES NO BORRAR PENDEJO
 // #include <char>
 #include <fstream>
 #include "json_parsing.h"   
+
+
+
+
 using namespace std;
 /*
 IINCLUDES NO BORRAR PENDEJO
@@ -63,6 +67,7 @@ class Persona {
 
 void json_parsing::lector(){
     
+    Persona listPersonasTemp[1000];
     // Usando el fstream para tomar la ruta del archivo
     ifstream file("DATOS.json");
     Json::Value actualJson;
@@ -104,10 +109,11 @@ void json_parsing::lector(){
         Persona usuario(nick,edad,monedas,password);
 
         cout << usuario.getNombre() << " "  << usuario.getEdad() << " " << usuario.getMonedas() << " " << usuario.getPassword() << endl;
+        
 
     }
     
     
-    //return 0;
+    // return listPersonasTemp;
 }
 
