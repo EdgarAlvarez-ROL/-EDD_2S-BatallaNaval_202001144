@@ -37,7 +37,10 @@
 #include "ListaCircular.h"
 #include "ListaCircular.cpp"
 
-
+#include "ListaInterna.h"
+#include "ListaInterna.cpp"
+#include "ListaPrincipal.h"
+#include "ListaPrincipal.cpp"
 /////////////
 // #include<stdio.h>
 // #include<conio.h>
@@ -48,6 +51,9 @@ using namespace std;
 
 // INICIO -Variables GLOBALES
     ListaCircular listaCircu;
+    ListaPrincipal listaArticulos;
+    // ListaPrincipal listaPrincipal;
+    
 // FIN    -Variables GLOBALES
 
 int lectorJson(){
@@ -67,34 +73,45 @@ int lectorJson(){
     // Numero de elementos dentro del JSON
     //cout << "Objeto de la Rama Principal de JSON: " << actualJson.size() << endl;
     
-    
+    // USUARIOS
     const Json::Value users = actualJson["usuarios"];
-   
     for(int i = 0; i < users.size(); i = i + 1){
-        //listaUsuarios->
-        /* 
-        * SIRVE NO BORRAR
-        cout << i << endl;
-        cout << users[i]["nick"] << endl;
-        * SIRVE NO BORRAR
-        */
 
         string nick = users[i]["nick"].asString();
-        
+
         string edadTemp = (users[i]["edad"].asString());
         int edad = std::atoi(edadTemp.c_str());
 
         string monTemp = (users[i]["monedas"].asString());
         int monedas = std::atoi(monTemp.c_str());
-        
+
         string password = users[i]["password"].asString();
 
         // cout << edad << endl;
         PersonaA usuario(nick,edad,monedas,password);
-
-        cout << usuario.getNombre() << " "  << usuario.getEdad() << " " << usuario.getMonedas() << " " << usuario.getPassword() << endl;
+        // cout << usuario.getNombre() << " "  << usuario.getEdad() << " " << usuario.getMonedas() << " " << usuario.getPassword() << endl;
         
         listaCircu.InsertarFinal(usuario);
+
+    }
+
+    const Json::Value articulos = actualJson["articulos"];
+    for(int i=0; i < articulos.size(); i = i + 1){
+
+        string idTemp = articulos[i]["id"].asString();
+        int id = std::atoi(idTemp.c_str());
+
+        string categoria = articulos[i]["categoria"].asString();
+
+        string precioTemp = articulos[i]["precio"].asString();
+        int precio = std::atoi(precioTemp.c_str());
+
+        string nombre = articulos[i]["nombre"].asString();
+
+        string src = articulos[i]["src"].asString();
+
+        ArticuloA nuevoArticulo = ArticuloA(categoria,id,precio,nombre,src); //categoria id precio nombre src
+        listaArticulos.Insertar(nuevoArticulo,nuevoArticulo.getCategoria());
 
     }
     
@@ -108,10 +125,10 @@ int main()
     int opcion = 0;
     char opcionLogin = 'z';
 
+    // listaPrincipal.Insertar(1,1);
     
     do
     {
-      
         // FUNCIONA
         // pr prueba;
         // prueba.Mostrar(3);
@@ -138,7 +155,7 @@ int main()
                 // Persona lisTEmpPersonas[1000];
                 // Persona lisTEmpPersonas = lectorJson.lector();
                 
-                
+                cout << "\n====Carga del Archivo con Exitos====\n";
             //    g++ main.cpp -o main
                 // //FUNCIONA 
                 
@@ -195,6 +212,7 @@ int main()
                 switch (opcionLogin)
                 {
                 case 'a':{
+                    cout << "\n======Editar Informacion======";
                     listaCircu.Imprimir();
                     cout << "\nIngrese su numero de usuario: ";
                     cin >> numberUser;
@@ -203,10 +221,10 @@ int main()
 
                     listaCircu.ModificarUsuario(numberUser,contrass);
                     
-
                     break;
                     }
                 case 'b':{
+                    cout << "\n======Eliminar Cuenta======";
                     listaCircu.Imprimir();
                     cout << "\nIngrese su numero de usuario: ";
                     cin >> numberUser;
@@ -215,11 +233,13 @@ int main()
                     listaCircu.EliminarUsuario(numberUser, contrass);
                     break;
                     }
-                case 'c':
-                cout << "e";
+                case 'c':{
+                    cout << "\n======Tutorial======";
+
                     break;
+                    }
                 case 'd':
-                cout << "d";
+                    // listaArticulos.Imprimir();l
                     break;
                 case 'e':
                     cout << "e";
@@ -239,11 +259,13 @@ int main()
                 cout << "\n";
                 break;
             }
-            case 4:
+            case 4:{
                 cout << " 4. Reportes \n";
+                listaArticulos.GenerarGrafo();
                 //system("pause>nul"); // Pausa
                 cout << "\n";
                 break; 
+            }
             case 0:
                 // Lista de instrucciones de la opción 1                
                 cout << "\n";
