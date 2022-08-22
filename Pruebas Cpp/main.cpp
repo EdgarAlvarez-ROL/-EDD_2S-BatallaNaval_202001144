@@ -41,6 +41,10 @@
 #include "ListaInterna.cpp"
 #include "ListaPrincipal.h"
 #include "ListaPrincipal.cpp"
+
+#include "Pila.h"
+#include "Pila.cpp"
+
 /////////////
 // #include<stdio.h>
 // #include<conio.h>
@@ -52,6 +56,7 @@ using namespace std;
 // INICIO -Variables GLOBALES
     ListaCircular listaCircu;
     ListaPrincipal listaArticulos;
+    Pila pilaTutorial;
     // ListaPrincipal listaPrincipal;
     
 // FIN    -Variables GLOBALES
@@ -114,8 +119,27 @@ int lectorJson(){
         listaArticulos.Insertar(nuevoArticulo,nuevoArticulo.getCategoria());
 
     }
+
+    const Json::Value tuto = actualJson["tutorial"];
+    string anchoTemp = tuto["ancho"].asString();
+    int ancho = std::atoi(anchoTemp.c_str());
+
+    string altoTemp = tuto["alto"].asString();
+    int alto = std::atoi(altoTemp.c_str());
+
+    const Json::Value movs = tuto["movimientos"];
+    for(int i=0; i < movs.size(); i = i + 1){
+        string xM = movs[i]["x"].asString();
+        string yM = movs[i]["y"].asString();
+
+        string coordenada = xM +  "," + yM;
+        // cout << coordenada;
+
+        TutorialA tutorial = TutorialA(ancho,alto,coordenada);
+        pilaTutorial.push(tutorial);
+    }    
     
-    
+
     return 0;
 }
    
@@ -235,7 +259,7 @@ int main()
                     }
                 case 'c':{
                     cout << "\n======Tutorial======";
-
+                    pilaTutorial.Imprimir();
                     break;
                     }
                 case 'd':
@@ -261,9 +285,10 @@ int main()
             }
             case 4:{
                 cout << " 4. Reportes \n";
-                listaArticulos.GenerarGrafo();
-                listaCircu.GrafoUsuarios();
-                //system("pause>nul"); // Pausa
+                // listaArticulos.GenerarGrafo(); // LISTA DE LISTAS
+                // listaCircu.GrafoUsuarios();
+                pilaTutorial.GrafoPilaTuto();
+                // system("pause>nul"); // Pausa
                 cout << "\n";
                 break; 
             }

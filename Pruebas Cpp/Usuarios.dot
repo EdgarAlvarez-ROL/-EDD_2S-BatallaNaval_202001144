@@ -15,8 +15,8 @@ Uedgar[label="edgar"];
 {rank=same;
 UJUAN->Upablo->Ujose->Uedgar
 Uedgar->Ujose->Upablo->UJUAN
-UJUAN->edgar
-Uedgar->JUAN
+UJUAN->Uedgar
+Uedgar->UJUAN
 
 }
 }

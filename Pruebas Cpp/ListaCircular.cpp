@@ -258,9 +258,9 @@ void ListaCircular::GrafoUsuarios() {
         actual = Inicio;
         final = Ultimo;
 
-        dot = dot + "U" + ((actual->p1).getNombre()) + "->" + ((final->p1).getNombre());
+        dot = dot + "U" + ((actual->p1).getNombre()) + "->U" + ((final->p1).getNombre());
         dot = "\n" +dot + "\n"; 
-        dot = dot + "U" + ((final->p1).getNombre()) + "->" + ((actual->p1).getNombre());
+        dot = dot + "U" + ((final->p1).getNombre()) + "->U" + ((actual->p1).getNombre());
 
 
     dot = "\n" +dot + "\n";        
