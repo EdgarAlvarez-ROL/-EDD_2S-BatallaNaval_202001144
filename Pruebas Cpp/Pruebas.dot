@@ -6,7 +6,7 @@
 
 
 digraph G {
-label="ListaDeImagenes";
+label="Lista de Listas de los Articulos";
 node [shape=box];
 //agregar nodos
 N1[label="Legendario"];

@@ -37,7 +37,7 @@ void ListaPrincipal::Imprimir() {
 void ListaPrincipal::GenerarGrafo() {
     string dot = "";
     dot = dot + "\ndigraph G {\n";
-    dot = dot + "label=\"ListaDeImagenes\";\n";
+    dot = dot + "label=\"Lista de Listas de los Articulos\";\n";
     dot = dot + "node [shape=box];\n";
 
     nodoprincipal*aux = Inicio;
@@ -91,7 +91,7 @@ void ListaPrincipal::GenerarGrafo() {
 
     cout << dot;
     
-     //------->escribir archivo
+    //------->escribir archivo
     ofstream file;
     file.open("Pruebas.dot");
     file << dot;

@@ -205,3 +205,88 @@ void ListaCircular::EliminarUsuario(int numberUser, string contrass) {
  
 }
 
+
+
+void ListaCircular::GrafoUsuarios() {
+    string dot = "";
+    dot = dot + "\ndigraph G {\n";
+    dot = dot + "label=\"Lista de Usuarios\";\n";
+    dot = dot + "node [shape=box];\n";
+
+    nodocircu*actual = new nodocircu();
+    actual = Inicio;
+    dot = dot + "//agregar nodos\n";
+    // int i;
+    // i=0;
+    if (Inicio != NULL){
+        
+        while(actual != NULL){
+            dot = dot + "U" + ((actual->p1).getNombre()) + "[label=\"" + (actual->p1).getNombre() + "\"];\n";
+            // cout << "\n "<< i << " " << (actual->p1).getNombre();
+            actual = actual->sig;
+            // i = i+1;
+        }
+
+        dot = dot + "//Enlazar imagenes\n";
+        dot = dot + "{rank=same;\n";
+
+        /**CONECTANDO NODOS DE PRINCIPIO A FIN**/
+        actual = Inicio;
+        while (actual != NULL) {
+        dot = dot + "U" + ((actual->p1).getNombre());
+        if (actual->sig != NULL) {
+            dot = dot + "->";
+        }
+        actual = actual->sig;
+        }
+
+        dot = "\n" +dot + "\n"; 
+
+        /**CONECTANDO NODOS DE fIN A PRINCIPIO**/
+        actual = Ultimo;
+        while (actual != NULL) {
+        dot = dot + "U" + ((actual->p1).getNombre());
+        if (actual->atras != NULL) {
+            dot = dot + "->";
+        }
+        actual = actual->atras;
+        }
+
+         dot = "\n" +dot + "\n";  
+
+        nodocircu*final = new nodocircu();
+        actual = Inicio;
+        final = Ultimo;
+
+        dot = dot + "U" + ((actual->p1).getNombre()) + "->" + ((final->p1).getNombre());
+        dot = "\n" +dot + "\n"; 
+        dot = dot + "U" + ((final->p1).getNombre()) + "->" + ((actual->p1).getNombre());
+
+
+    dot = "\n" +dot + "\n";        
+    dot = dot + "\n}\n";
+    dot = dot + "}\n";
+
+    cout << dot;
+
+    //------->escribir archivo
+    ofstream file;
+    file.open("Usuarios.dot");
+    file << dot;
+    file.close();
+
+    //------->generar png
+    system(("dot -Tpng Usuarios.dot -o  Usuarios.png"));
+
+    //------>abrir archivo
+    system(("Usuarios.png"));
+    
+    }else{
+        cout << "LA LISTA ESTA VACIA";
+    }
+ 
+}
+
+
+
+

@@ -1,0 +1,22 @@
+
+
+
+
+
+digraph G {
+label="Lista de Usuarios";
+node [shape=box];
+//agregar nodos
+UJUAN[label="JUAN"];
+Upablo[label="pablo"];
+Ujose[label="jose"];
+Uedgar[label="edgar"];
+//Enlazar imagenes
+{rank=same;
+UJUAN->Upablo->Ujose->Uedgar
+Uedgar->Ujose->Upablo->UJUAN
+UJUAN->edgar
+Uedgar->JUAN
+
+}
+}

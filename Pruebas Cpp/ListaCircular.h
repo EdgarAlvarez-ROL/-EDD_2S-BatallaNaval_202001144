@@ -37,6 +37,7 @@ public:
     void Imprimir();
     void ModificarUsuario(int numberUser,  string contrass);
     void EliminarUsuario(int numberUser,  string contrass);
+    void GrafoUsuarios();
 private:
 };
 

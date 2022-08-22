@@ -262,6 +262,7 @@ int main()
             case 4:{
                 cout << " 4. Reportes \n";
                 listaArticulos.GenerarGrafo();
+                listaCircu.GrafoUsuarios();
                 //system("pause>nul"); // Pausa
                 cout << "\n";
                 break; 
