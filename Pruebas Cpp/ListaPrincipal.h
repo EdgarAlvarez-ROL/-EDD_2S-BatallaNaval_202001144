@@ -28,6 +28,7 @@ public:
         Inicio = NULL;
     }
     void Imprimir();
+    void ImprimirArticulos();
     void GenerarGrafo();
     void Insertar(ArticuloA valor, string categoria);
     nodoprincipal * BuscarPrincipal(nodoprincipal*inicioL, string categoria);

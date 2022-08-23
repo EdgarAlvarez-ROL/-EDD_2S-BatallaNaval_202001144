@@ -147,8 +147,10 @@ int lectorJson(){
 int main()
 {
     int opcion = 0;
+    string numberUser;
+    string contrass;
     char opcionLogin = 'z';
-
+    int numReport = 0;
     // listaPrincipal.Insertar(1,1);
     
     do
@@ -220,74 +222,107 @@ int main()
                 break;
                 }
             case 3:{
-                int numberUser;
-                string contrass;
+                
                 cout << " 3. Login \n";
-                cout << "   a. Editar Informacion \n";
-                cout << "   b. Eliminar Cuenta \n";
-                cout << "   c. Ver el Tutorial \n";
-                cout << "   d. Ver articulos de la tienda \n";
-                cout << "   e. Realizaqr Movimientos \n";
-                cout << "   f. Salir al menu principal \n";
+                cout << "\nIngrese su nombre de usuario: ";
+                cin >> numberUser;
+                cout << "Ingrese su contraseña: ";
+                cin >> contrass;
 
-                cout << "Ingrese una opcion a ejecutar\n";
-                cin >> opcionLogin;
+                bool encontrado = listaCircu.BuscarUsuario(numberUser,contrass);
+                int monedas = listaCircu.BuscarUsuario(numberUser,contrass);
+                // cout << "MONEDAS: " << monedas;
+                if (encontrado == 1){
+                    do
+                    {
+                        cout << "\n USUARIO ENCONTRADO\n";
+                        cout << "   a. Editar Informacion \n";
+                        cout << "   b. Eliminar Cuenta \n";
+                        cout << "   c. Ver el Tutorial \n";
+                        cout << "   d. Ver articulos de la tienda \n";
+                        cout << "   e. Realizaqr Movimientos \n";
+                        cout << "   f. Salir al menu principal \n";
+                        cout << "Ingrese una opcion: ";
+                        cin >> opcionLogin;
 
-                switch (opcionLogin)
-                {
-                case 'a':{
-                    cout << "\n======Editar Informacion======";
-                    listaCircu.Imprimir();
-                    cout << "\nIngrese su numero de usuario: ";
-                    cin >> numberUser;
-                    cout << "Ingrese su contraseña: ";
-                    cin >> contrass;
+                        switch (opcionLogin)
+                        {
+                            case 'a':{
+                                cout << "\n======Editar Informacion======";
+                                // listaCircu.Imprimir();
+                                listaCircu.ModificarUsuario(numberUser,contrass);
+                                opcionLogin = 'f';
+                                break;
+                                }
+                            case 'b':{
+                                cout << "\n======Eliminar Cuenta======";                                
+                                listaCircu.EliminarUsuario(numberUser, contrass);
+                                opcionLogin = 'f';
+                                break;
+                                }
+                            case 'c':{
+                                cout << "\n======Tutorial======";
+                                pilaTutorial.Imprimir();
+                                break;
+                                }
+                            case 'd':{
+                                cout << "\n                           MONEDAS: +" << monedas;
+                                cout << "\nTIENDA";
+                                cout << "\nID---------NOMBRE---------CATEGORIA---------PRECIO\n";
+                                listaArticulos.ImprimirArticulos();
+                                break;
+                            }
+                            case 'e':
+                                cout << "e";
+                                break;
+                            case 'f':
+                                cout << "Saliendo al Menu Principal...";
+                                break;
+                            
+                            
+                            default:cout << "Usted ha ingresado una opción incorrecta" << "\n" << endl;
+                                break;
+                        }
 
-                    listaCircu.ModificarUsuario(numberUser,contrass);
+                    } while (opcionLogin != 'f');
                     
-                    break;
-                    }
-                case 'b':{
-                    cout << "\n======Eliminar Cuenta======";
-                    listaCircu.Imprimir();
-                    cout << "\nIngrese su numero de usuario: ";
-                    cin >> numberUser;
-                    cout << "Ingrese su contraseña: ";
-                    cin >> contrass;
-                    listaCircu.EliminarUsuario(numberUser, contrass);
-                    break;
-                    }
-                case 'c':{
-                    cout << "\n======Tutorial======";
-                    pilaTutorial.Imprimir();
-                    break;
-                    }
-                case 'd':
-                    // listaArticulos.Imprimir();l
-                    break;
-                case 'e':
-                    cout << "e";
-                    break;
-                case 'f':
-                    // cout << "a";
-                    break;
-                
-                
-                default:cout << "Usted ha ingresado una opción incorrecta" << "\n" << endl;
-                    break;
+                }else{
+                    cout << "\nUsuario y/o Contraseña Incorrecta\n";
                 }
                 
-
-
+                
                 //system("pause>nul"); // Pausa
                 cout << "\n";
                 break;
             }
             case 4:{
+                
                 cout << " 4. Reportes \n";
-                // listaArticulos.GenerarGrafo(); // LISTA DE LISTAS
-                // listaCircu.GrafoUsuarios();
-                pilaTutorial.GrafoPilaTuto();
+                cout << "\n\n   1. Grafica de usuarios en el sistema";
+                cout << "\n   2. Grafica del Tutorial";
+                cout << "\n   3. Grafica de Articulos en el sistema";
+                cout << "\nIngrese el numero de reporte que desea crear: ";
+                cin >> numReport;
+                
+                if (numReport == 1)
+                {
+                    listaCircu.GrafoUsuarios();
+                }else if (numReport == 2)
+                {
+                    pilaTutorial.GrafoPilaTuto();
+                }else if (numReport == 3)
+                {
+                    listaArticulos.GenerarGrafo(); // LISTA DE LISTAS
+                }else
+                {
+                    cout << "\n\n Opcion no encontrada\n\n ";
+                }
+                
+                
+                
+                
+                
+                
                 // system("pause>nul"); // Pausa
                 cout << "\n";
                 break; 

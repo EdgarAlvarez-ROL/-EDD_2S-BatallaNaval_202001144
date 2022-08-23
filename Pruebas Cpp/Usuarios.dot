@@ -11,12 +11,13 @@ UJUAN[label="JUAN"];
 Upablo[label="pablo"];
 Ujose[label="jose"];
 Uedgar[label="edgar"];
+UROL[label="ROL"];
 //Enlazar imagenes
 {rank=same;
-UJUAN->Upablo->Ujose->Uedgar
-Uedgar->Ujose->Upablo->UJUAN
-UJUAN->Uedgar
-Uedgar->UJUAN
+UJUAN->Upablo->Ujose->Uedgar->UROL
+UROL->Uedgar->Ujose->Upablo->UJUAN
+UJUAN->UROL
+UROL->UJUAN
 
 }
 }

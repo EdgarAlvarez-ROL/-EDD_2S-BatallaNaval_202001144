@@ -3,7 +3,8 @@
 { "nick": "JUAN", "password": "juan", "monedas": "1", "edad": "11" },
 { "nick": "pablo", "password": "pablo", "monedas": "2", "edad": "22" },
 { "nick": "jose", "password": "jose", "monedas": "3", "edad": "33" },
-{ "nick": "edgar", "password": "jose", "monedas": "4", "edad": "44" }
+{ "nick": "rol", "password": "rol", "monedas": "2222", "edad": "44" },
+{ "nick": "edgar", "password": "edgar", "monedas": "4", "edad": "44" }
 ],
 "articulos": [
 { "id": "1", "categoria": "Legendario", "precio": "1", "nombre": "Caja", "src": "s" },

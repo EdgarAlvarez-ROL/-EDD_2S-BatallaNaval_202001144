@@ -35,9 +35,10 @@ public:
     void InsertarFinal(PersonaA p1);
     // void InsertarEnOrden(PersonaA p1);
     void Imprimir();
-    void ModificarUsuario(int numberUser,  string contrass);
-    void EliminarUsuario(int numberUser,  string contrass);
+    void ModificarUsuario(string numberUser,  string contrass);
+    void EliminarUsuario(string numberUser,  string contrass);
     void GrafoUsuarios();
+    int BuscarUsuario(string numberUser,  string contrass);
 private:
 };
 

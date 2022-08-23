@@ -34,6 +34,20 @@ void ListaPrincipal::Imprimir() {
     cout << ("NULL");
 }
 
+void ListaPrincipal::ImprimirArticulos() {
+    nodoprincipal*aux = Inicio;
+    while (aux != NULL) {
+        nodointerno * auxI = aux->listainterna.Inicio;
+        while (auxI != NULL) {
+            cout << ((auxI->valor).getId()) << "\t" << (auxI->valor).getNombre() << "\t \t" << (auxI->valor).getCategoria() << "\t" << (auxI->valor).getPrecio();
+            cout << "\n";
+            auxI = auxI->sig;
+        }
+        aux = aux->sig;
+    }
+}
+
+
 void ListaPrincipal::GenerarGrafo() {
     string dot = "";
     dot = dot + "\ndigraph G {\n";

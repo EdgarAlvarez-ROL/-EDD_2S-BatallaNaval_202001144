@@ -55,7 +55,7 @@ void Pila::GrafoPilaTuto() {
 
     nodopila*aux = Inicio;
     dot = dot + "//agregar nodos\n";
-    dot = dot + "P1nodoZ" + "[label=\"" + std::to_string((aux->valor).getAncho()) + " " + std::to_string((aux->valor).getAlto()) + "\"];\n";
+    dot = dot + "P1Cabeza" + "[label=\"" + "Ancho: " + std::to_string((aux->valor).getAncho()) + " | Alto: " + std::to_string((aux->valor).getAlto()) + "\"];\n";
     int i = 0;
     if (Inicio != NULL){
         while (aux != NULL) {

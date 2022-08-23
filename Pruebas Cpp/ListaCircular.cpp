@@ -30,16 +30,6 @@ void ListaCircular::InsertarFinal(PersonaA p1) {
         Ultimo = nuevo;
     }
 
-    /* Este es de Lista Simple*/
-    // if(Inicio == NULL){
-    //     Inicio = nuevo;
-    //     Inicio->sig = Inicio;
-    //     Ultimo  = Inicio;
-    // }else{
-    //     Ultimo->sig = nuevo;
-    //     nuevo->sig = Inicio;
-    //     Ultimo = nuevo;
-    // }
 }
 
 
@@ -71,7 +61,7 @@ void ListaCircular::Imprimir() {
 }
 
 
-void ListaCircular::ModificarUsuario(int numberUser, string contrass) {
+void ListaCircular::ModificarUsuario(string numberUser, string contrass) {
     // nodocircu*aux = Inicio;
     nodocircu*actual = new nodocircu();
     actual = Inicio;
@@ -80,7 +70,7 @@ void ListaCircular::ModificarUsuario(int numberUser, string contrass) {
     if (Inicio != NULL){
 
           while(actual != NULL){
-            if (numberUser == i && contrass == ((actual->p1).getPassword())){
+            if (numberUser == ((actual->p1).getNombre()) && contrass == ((actual->p1).getPassword())){
                 cout << "\n\nIngrese su nuevo Nick: ";
                 string newNick;
                 cin >> newNick;
@@ -145,7 +135,7 @@ void ListaCircular::ModificarUsuario(int numberUser, string contrass) {
 
 
 
-void ListaCircular::EliminarUsuario(int numberUser, string contrass) {
+void ListaCircular::EliminarUsuario(string numberUser, string contrass) {
     // nodocircu*aux = Inicio;
     nodocircu*actual = new nodocircu();
     actual = Inicio;
@@ -161,7 +151,7 @@ void ListaCircular::EliminarUsuario(int numberUser, string contrass) {
 
           while(actual != NULL && encontrado!=true){
 
-            if (numberUser == i && contrass == ((actual->p1).getPassword())){
+            if (numberUser == ((actual->p1).getNombre()) && contrass == ((actual->p1).getPassword())){
                 cout << "Usuario Encontrado\n";
                 cout << "DESEA ELIMINAR SU CUENTA [y/n]: ";
                 string confirmacion;
@@ -290,3 +280,25 @@ void ListaCircular::GrafoUsuarios() {
 
 
 
+
+int ListaCircular::BuscarUsuario(string numberUser, string contrass) {
+    nodocircu*actual = new nodocircu();
+    actual = Inicio;
+
+    bool encontrado = false;
+    int monedas;
+
+    while(actual != NULL && encontrado!=true){
+
+        if (numberUser == ((actual->p1).getNombre()) && contrass == ((actual->p1).getPassword())){
+                // cout << "Usuario Encontrado\n";
+                encontrado = true;
+                monedas = ((actual->p1).getMonedas());
+        }
+        // anterior = actual;
+        actual = actual->sig;
+    }
+
+    return encontrado, monedas;
+ 
+}
