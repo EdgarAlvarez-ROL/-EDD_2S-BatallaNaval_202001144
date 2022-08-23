@@ -1,14 +1,22 @@
 {
 "usuarios": [
-{ "nick": "JUAN", "password": "1", "monedas": "1", "edad": "11" },
-{ "nick": "PABLO", "password": "2", "monedas": "2", "edad": "22" },
-{ "nick": "JOSE", "password": "2", "monedas": "3", "edad": "33" },
-{ "nick": "Edgar", "password": "44", "monedas": "4", "edad": "44" }
+{ "nick": "JUAN", "password": "juan", "monedas": "1", "edad": "11" },
+{ "nick": "pablo", "password": "pablo", "monedas": "2", "edad": "22" },
+{ "nick": "jose", "password": "jose", "monedas": "3", "edad": "33" },
+{ "nick": "rol", "password": "rol", "monedas": "2222", "edad": "44" },
+{ "nick": "edgar", "password": "edgar", "monedas": "4", "edad": "44" }
 ],
 "articulos": [
-{ "id": "CAJA0", "categoria": "NORMAL", "precio": "1", "nombre": "caja", "src": "s" },
-{ "id": "CAJA1", "categoria": "NORMAL", "precio": "2", "nombre": "caja", "src": "s" },
-{ "id": "CAJA2", "categoria": "NORMAL", "precio": "3", "nombre": "caja", "src": "s" }
+{ "id": "1", "categoria": "Legendario", "precio": "4444", "nombre": "Caja", "src": "s" },
+{ "id": "2", "categoria": "Normal", "precio": "21", "nombre": "Espada", "src": "s" },
+{ "id": "3", "categoria": "Comun", "precio": "2", "nombre": "Hoja", "src": "s" },
+{ "id": "4", "categoria": "Raro", "precio": "215", "nombre": "Agua", "src": "s" },
+{ "id": "5", "categoria": "Epico", "precio": "284", "nombre": "Grial", "src": "s" },
+{ "id": "6", "categoria": "Legendario", "precio": "11", "nombre": "Arco", "src": "s" },
+{ "id": "7", "categoria": "Legendario", "precio": "211", "nombre": "Martillo", "src": "s" },
+{ "id": "8", "categoria": "Legendario", "precio": "717", "nombre": "Tridente", "src": "s" },
+{ "id": "9", "categoria": "Comun", "precio": "1", "nombre": "Madera", "src": "s" },
+{ "id": "10", "categoria": "Comun", "precio": "0", "nombre": "Aire", "src": "s" }
 ],
 "tutorial": {
 "ancho":"4",

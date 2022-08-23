@@ -1,0 +1,17 @@
+
+
+digraph G {
+label="Lista de Usuarios";
+node [shape=box];
+//agregar nodos
+UJUAN[label=" Nombre: JUAN Edad:11"];
+Upablo[label=" Nombre: pablo Edad:22"];
+Ujose[label=" Nombre: jose Edad:33"];
+Urol[label=" Nombre: rol Edad:44"];
+Uedgar[label=" Nombre: edgar Edad:44"];
+//Enlazar imagenes
+{rank=same;
+UJUAN->Upablo->Ujose->Urol->Uedgar
+
+}
+}

@@ -1,0 +1,37 @@
+
+
+
+
+
+
+
+digraph G {
+label="Lista de Listas de los Articulos";
+node [shape=box];
+//agregar nodos
+N1[label="Legendario"];
+C1[label="Caja"];
+C6[label="Arco"];
+C7[label="Martillo"];
+C8[label="Tridente"];
+N2[label="Normal"];
+C2[label="Espada"];
+N3[label="Comun"];
+C9[label="Madera"];
+C3[label="Hoja"];
+C10[label="Aire"];
+N4[label="Raro"];
+C4[label="Agua"];
+N5[label="Epico"];
+C5[label="Grial"];
+//Enlazar imagenes
+{rank=same;
+N1->N2->N3->N4->N5
+N1->C1->C6->C7->C8
+N2->C2
+N3->C9->C3->C10
+N4->C4
+N5->C5
+
+}
+}

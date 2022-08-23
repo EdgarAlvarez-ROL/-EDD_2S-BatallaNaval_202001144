@@ -14,13 +14,16 @@
 #ifndef NODOSIMPLE_H
 #define NODOSIMPLE_H
 #include <stddef.h>
+// #include "PersonaA.h"
 
 class nodosimple {
 public:
+    // Persona personita;
     int valor;
     nodosimple*sig;
     nodosimple() {
         sig = NULL;
+        // PersonaA pcua("",0,0,"");  
         valor = 0;
     }
 private:
