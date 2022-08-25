@@ -66,6 +66,39 @@ void ListaCircular::InsertarEnOrdenReporte(PersonaA p1) {
 }
 
 
+void ListaCircular::InsertarEnOrdenReporteDESC(PersonaA p1) {
+    nodocircu*nuevo = new nodocircu();
+    (nuevo->p1).setEdad(p1.getEdad());
+    (nuevo->p1).setMonedas(p1.getMonedas());
+    (nuevo->p1).setNombre(p1.getNombre());
+    (nuevo->p1).setPassword(p1.getPassword());
+
+    if (Inicio == NULL) {//Si la lista se encuentra vacia
+        Inicio = nuevo;
+    } else {//si la lista no esta vacia
+        nodocircu*auxActual = Inicio;
+        nodocircu*auxSiguiente;
+        while (auxActual != NULL) {
+            auxSiguiente = auxActual->sig;
+            if (((nuevo->p1).getEdad()) > ((auxActual->p1).getEdad())) {//insertar al inicio de la lista por que es menor
+                nuevo->sig = auxActual;
+                Inicio = nuevo;
+                break;
+            } else if (auxSiguiente == NULL) {//insertar al final de la lista
+                auxActual->sig = nuevo;
+                break;
+            } else if (((nuevo->p1).getEdad()) > ((auxSiguiente->p1).getEdad())) {//insertar en medio de la lista
+                auxActual->sig = nuevo;
+                nuevo->sig = auxSiguiente;
+                break;
+            }
+            auxActual = auxActual->sig;
+        }
+    }
+}
+
+
+
 
 
 
@@ -189,8 +222,8 @@ void ListaCircular::EliminarUsuario(string numberUser, string contrass) {
           while(actual != NULL && encontrado!=true){
 
             if (numberUser == ((actual->p1).getNombre()) && contrass == ((actual->p1).getPassword())){
-                cout << "Usuario Encontrado\n";
-                cout << "DESEA ELIMINAR SU CUENTA [y/n]: ";
+                // cout << "Usuario Encontrado\n";
+                cout << "\nDESEA ELIMINAR SU CUENTA [y/n]: ";
                 string confirmacion;
                 cin >> confirmacion;
                 if (confirmacion == "y"){
@@ -243,7 +276,7 @@ void ListaCircular::GrafoASCUsuarios() {
 
     while (actual != NULL) {
         // cout <<"[" << (aux->p1).getEdad() << "]->";
-        dot = dot + "U" + ((actual->p1).getNombre()) + "[label=\"" + " Nombre: " + (actual->p1).getNombre() + " Edad:" + std::to_string((actual->p1).getEdad()) + "\"];\n";
+        dot = dot + "U" + ((actual->p1).getNombre()) + "[label=\"" + " Nombre: " + (actual->p1).getNombre() + " \nEdad:" + std::to_string((actual->p1).getEdad()) + "\"];\n";
         actual = actual->sig;
     }
     
@@ -369,20 +402,41 @@ int ListaCircular::BuscarUsuario(string numberUser, string contrass) {
     nodocircu*actual = new nodocircu();
     actual = Inicio;
 
-    bool encontrado = false;
+    nodocircu*anterior = new nodocircu();
+    anterior = NULL;
+
+    int i;
+    i = 0;
+
     int monedas;
 
-    while(actual != NULL && encontrado!=true){
+    bool encontrado = false;
+    bool cua = false;
+    
+    if (Inicio != NULL){
 
-        if (numberUser == ((actual->p1).getNombre()) && contrass == ((actual->p1).getPassword())){
-                // cout << "Usuario Encontrado\n";
-                encontrado = true;
+          while(actual != NULL && encontrado!=true){
+
+            if (numberUser == ((actual->p1).getNombre()) && contrass == ((actual->p1).getPassword())){
+                
                 monedas = ((actual->p1).getMonedas());
+                encontrado = true;
+                cua  = encontrado;
+                    // encontrado = true;
+            }
+            else{
+                i = i+1;
+                // cout << "Contraseña y/o Usuario Incorrecto \n";
+            }
+            anterior = actual;
+            actual = actual->sig;
         }
-        // anterior = actual;
-        actual = actual->sig;
+        
+    }else{
+        cout << "LA LISTA ESTA VACIA";
     }
-
-    return encontrado, monedas;
+ 
+    // return 
+    return cua, monedas;
  
 }

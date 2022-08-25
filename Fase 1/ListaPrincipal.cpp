@@ -82,6 +82,7 @@ void ListaPrincipal::GenerarGrafo() {
     }
     /*CONECTAR CADA NODO CON CADA CAJA*/
     dot = "\n" +dot + "\n";
+    dot = dot + "\n}\n";
     aux = Inicio;
     while (aux != NULL) {
 
@@ -100,7 +101,7 @@ void ListaPrincipal::GenerarGrafo() {
     }
     /*CONECTAR CADA NODO CON CADA CAJA*/
 
-    dot = dot + "\n}\n";
+    
     dot = dot + "}\n";
 
     cout << dot;

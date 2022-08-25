@@ -4,13 +4,13 @@ digraph G {
 label="Pila del Tutorial";
 node [shape=box];
 //agregar nodos
-P1nodoZ[label="4 4"];
+P1Cabeza[label="Ancho: 4 | Alto: 4"];
 Ptuto0[label="5,6"];
 Ptuto1[label="3,4"];
 Ptuto2[label="1,2"];
 //Enlazar imagenes
 {rank=same;
-P1nodoZ->Ptuto0->Ptuto1->Ptuto2
+P1Cabeza->Ptuto0->Ptuto1->Ptuto2
 
 }
 }

@@ -69,7 +69,7 @@ void Pila::GrafoPilaTuto() {
         dot = dot + "//Enlazar imagenes\n";
         dot = dot + "{rank=same;\n";
 
-        dot =  dot +"P1nodoZ->";
+        dot =  dot +"P1Cabeza->";
         
         /**CONECTANDO NODOS DE PRINCIPIO A FIN**/
         aux = Inicio;

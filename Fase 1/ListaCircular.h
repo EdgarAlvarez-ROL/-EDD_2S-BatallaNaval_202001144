@@ -41,6 +41,7 @@ public:
     int BuscarUsuario(string numberUser,  string contrass);
 
     void InsertarEnOrdenReporte(PersonaA p1);
+    void InsertarEnOrdenReporteDESC(PersonaA p1);
     void GrafoASCUsuarios();
 
 private:

@@ -56,9 +56,11 @@ using namespace std;
 // INICIO -Variables GLOBALES
     ListaCircular listaCircu;
     ListaCircular listaSimple_UsuariosASC;
+    ListaCircular listaSimple_UsuariosDESC;
 
     ListaPrincipal listaArticulos;
     ListaInterna listaSimple_ArticulosASC;
+    ListaInterna listaSimple_ArticulosDESC;
 
     Pila pilaTutorial;
     // ListaPrincipal listaPrincipal;
@@ -66,9 +68,21 @@ using namespace std;
 // FIN    -Variables GLOBALES
 
 int lectorJson(){
+
+    cout << "\nIngrese el nombre del archivo a leer:  ";
+    string nameArchivo;
+    cin >> nameArchivo;
+
+    nameArchivo = nameArchivo + ".json";
     
     // Usando el fstream para tomar la ruta del archivo
-    ifstream file("DATOS.json");
+    ifstream file(nameArchivo);
+    
+    if (file.fail())
+    {
+       cout <<"\nERROR - archivo dañado o no encontrado\n";
+    }else {
+    
     Json::Value actualJson;
     Json::Reader reader;
     
@@ -102,6 +116,7 @@ int lectorJson(){
         
         listaCircu.InsertarFinal(usuario);
         listaSimple_UsuariosASC.InsertarEnOrdenReporte(usuario);
+        listaSimple_UsuariosDESC.InsertarEnOrdenReporteDESC(usuario);
 
     }
 
@@ -124,6 +139,7 @@ int lectorJson(){
         listaArticulos.Insertar(nuevoArticulo,nuevoArticulo.getCategoria());
 
         listaSimple_ArticulosASC.InsertarEnOrden(nuevoArticulo);
+        listaSimple_ArticulosDESC.InsertarEnOrdenDESC(nuevoArticulo);
 
     }
 
@@ -146,7 +162,7 @@ int lectorJson(){
         pilaTutorial.push(tutorial);
     }    
     
-
+    }
     return 0;
 }
    
@@ -191,7 +207,7 @@ int main()
                 cout << "\n====Carga del Archivo con Exitos====\n";
             //    g++ main.cpp -o main
                 // //FUNCIONA 
-                
+                listaCircu.Imprimir();
                 
                 //system("pause>nul"); // Pausa
                 cout << "\n";
@@ -235,11 +251,14 @@ int main()
                 cin >> numberUser;
                 cout << "Ingrese su contraseña: ";
                 cin >> contrass;
-
+                
+                // int encontrado;
+                // int monedas;
                 bool encontrado = listaCircu.BuscarUsuario(numberUser,contrass);
                 int monedas = listaCircu.BuscarUsuario(numberUser,contrass);
-                // cout << "MONEDAS: " << monedas;
-                if (encontrado == 1){
+                cout << "encontrado: " << encontrado;
+                cout << "  MOENEDAS: " << monedas;
+                if (encontrado == true){
                     do
                     {
                         cout << "\n USUARIO ENCONTRADO\n";
@@ -258,12 +277,15 @@ int main()
                                 cout << "\n======Editar Informacion======";
                                 // listaCircu.Imprimir();
                                 listaCircu.ModificarUsuario(numberUser,contrass);
+                                // listaSimple_UsuariosASC.ModificarUsuario(numberUser,contrass);
                                 opcionLogin = 'f';
                                 break;
                                 }
                             case 'b':{
                                 cout << "\n======Eliminar Cuenta======";                                
                                 listaCircu.EliminarUsuario(numberUser, contrass);
+                                // listaSimple_UsuariosASC.EliminarUsuario(numberUser,contrass);
+
                                 opcionLogin = 'f';
                                 break;
                                 }
@@ -309,7 +331,9 @@ int main()
                 cout << "\n   2. Grafica del Tutorial";
                 cout << "\n   3. Grafica de Articulos en el sistema";
                 cout << "\n   4. Usuarios en Orden Ascendente";
-                cout << "\n   5. Articulos en Orden Ascendente";
+                cout << "\n   5. Usuarios en Orden Descendente";
+                cout << "\n   6. Articulos en Orden Ascendente";
+                cout << "\n   7. Articulos en Orden Descendente";
                 cout << "\nIngrese el numero de reporte que desea crear: ";
                 cin >> numReport;
                 
@@ -327,8 +351,14 @@ int main()
                     listaSimple_UsuariosASC.GrafoASCUsuarios();
                 }else if (numReport == 5)
                 {
+                    listaSimple_UsuariosDESC.GrafoASCUsuarios();
+                }else if (numReport == 6)
+                {
                     listaSimple_ArticulosASC.GrafoArticulosASC();
-                }
+                }else if (numReport == 7)
+                {
+                    listaSimple_ArticulosDESC.GrafoArticulosASC();
+                }                
                 else
                 {
                     cout << "\n\n Opcion no encontrada\n\n ";

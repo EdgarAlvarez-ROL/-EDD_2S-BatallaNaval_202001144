@@ -29,6 +29,7 @@ public:
     }
     void InsertarFinal(ArticuloA valor);
     void InsertarEnOrden(ArticuloA valor);
+    void InsertarEnOrdenDESC(ArticuloA valor);
     void Imprimir();
     void GrafoArticulosASC();
 private:

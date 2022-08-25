@@ -4,19 +4,19 @@ digraph G {
 label="Lista de Usuarios";
 node [shape=box];
 //agregar nodos
-Arti10[label=" Articulo: Aire, Precio:0"];
-Arti9[label=" Articulo: Madera, Precio:1"];
-Arti3[label=" Articulo: Hoja, Precio:2"];
-Arti6[label=" Articulo: Arco, Precio:11"];
-Arti2[label=" Articulo: Espada, Precio:21"];
-Arti7[label=" Articulo: Martillo, Precio:211"];
-Arti4[label=" Articulo: Agua, Precio:215"];
-Arti5[label=" Articulo: Grial, Precio:284"];
-Arti8[label=" Articulo: Tridente, Precio:717"];
 Arti1[label=" Articulo: Caja, Precio:4444"];
+Arti8[label=" Articulo: Tridente, Precio:717"];
+Arti5[label=" Articulo: Grial, Precio:284"];
+Arti4[label=" Articulo: Agua, Precio:215"];
+Arti7[label=" Articulo: Martillo, Precio:211"];
+Arti2[label=" Articulo: Espada, Precio:21"];
+Arti6[label=" Articulo: Arco, Precio:11"];
+Arti3[label=" Articulo: Hoja, Precio:2"];
+Arti9[label=" Articulo: Madera, Precio:1"];
+Arti10[label=" Articulo: Aire, Precio:0"];
 //Enlazar imagenes
 {rank=same;
-Arti10->Arti9->Arti3->Arti6->Arti2->Arti7->Arti4->Arti5->Arti8->Arti1
+Arti1->Arti8->Arti5->Arti4->Arti7->Arti2->Arti6->Arti3->Arti9->Arti10
 
 }
 }

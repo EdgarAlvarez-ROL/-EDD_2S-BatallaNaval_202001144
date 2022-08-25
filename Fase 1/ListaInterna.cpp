@@ -60,6 +60,37 @@ void ListaInterna::InsertarEnOrden(ArticuloA valor) {
     }
 }
 
+
+
+void ListaInterna::InsertarEnOrdenDESC(ArticuloA valor) {
+    nodointerno*nuevo = new nodointerno();
+    nuevo->valor = valor;
+    if (Inicio == NULL) {//Si la lista se encuentra vacia
+        Inicio = nuevo;
+    } else {//si la lista no esta vacia
+        nodointerno*auxActual = Inicio;
+        nodointerno*auxSiguiente;
+        while (auxActual != NULL) {
+            auxSiguiente = auxActual->sig;
+            if (((nuevo->valor).getPrecio()) > ((auxActual->valor).getPrecio())) {//insertar al inicio de la lista por que es menor
+                nuevo->sig = auxActual;
+                Inicio = nuevo;
+                break;
+            } else if (auxSiguiente == NULL) {//insertar al final de la lista
+                auxActual->sig = nuevo;
+                break;
+            } else if (((nuevo->valor).getPrecio()) > ((auxSiguiente->valor.getPrecio()))) {//insertar en medio de la lista
+                auxActual->sig = nuevo;
+                nuevo->sig = auxSiguiente;
+                break;
+            }
+            auxActual = auxActual->sig;
+        }
+    }
+}
+
+
+
 void ListaInterna::Imprimir() {
     nodointerno*aux = Inicio;
     while (aux != NULL) {
