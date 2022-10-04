@@ -1,0 +1,61 @@
+
+
+digraph G {
+label="Pila del Tutorial";
+node [shape=box];
+//agregar nodos
+P1Cabeza[label="Ancho: 15 | Alto: 15"];
+Ptuto0[label="2,11"];
+Ptuto1[label="4,6"];
+Ptuto2[label="3,3"];
+Ptuto3[label="7,5"];
+Ptuto4[label="3,14"];
+Ptuto5[label="5,10"];
+Ptuto6[label="11,10"];
+Ptuto7[label="3,2"];
+Ptuto8[label="11,0"];
+Ptuto9[label="2,6"];
+Ptuto10[label="7,8"];
+Ptuto11[label="9,1"];
+Ptuto12[label="14,5"];
+Ptuto13[label="8,14"];
+Ptuto14[label="4,0"];
+Ptuto15[label="6,5"];
+Ptuto16[label="5,14"];
+Ptuto17[label="11,14"];
+Ptuto18[label="0,14"];
+Ptuto19[label="11,3"];
+Ptuto20[label="7,9"];
+Ptuto21[label="3,0"];
+Ptuto22[label="6,3"];
+Ptuto23[label="12,7"];
+Ptuto24[label="9,4"];
+Ptuto25[label="14,13"];
+Ptuto26[label="7,2"];
+Ptuto27[label="13,10"];
+Ptuto28[label="9,14"];
+Ptuto29[label="13,9"];
+Ptuto30[label="7,10"];
+Ptuto31[label="2,8"];
+Ptuto32[label="8,11"];
+Ptuto33[label="2,14"];
+Ptuto34[label="12,14"];
+Ptuto35[label="0,1"];
+Ptuto36[label="4,2"];
+Ptuto37[label="1,3"];
+Ptuto38[label="9,14"];
+Ptuto39[label="12,3"];
+Ptuto40[label="13,12"];
+Ptuto41[label="3,3"];
+Ptuto42[label="6,5"];
+Ptuto43[label="4,13"];
+Ptuto44[label="5,1"];
+Ptuto45[label="8,1"];
+Ptuto46[label="14,10"];
+Ptuto47[label="13,7"];
+//Enlazar imagenes
+{rank=same;
+P1Cabeza->Ptuto0->Ptuto1->Ptuto2->Ptuto3->Ptuto4->Ptuto5->Ptuto6->Ptuto7->Ptuto8->Ptuto9->Ptuto10->Ptuto11->Ptuto12->Ptuto13->Ptuto14->Ptuto15->Ptuto16->Ptuto17->Ptuto18->Ptuto19->Ptuto20->Ptuto21->Ptuto22->Ptuto23->Ptuto24->Ptuto25->Ptuto26->Ptuto27->Ptuto28->Ptuto29->Ptuto30->Ptuto31->Ptuto32->Ptuto33->Ptuto34->Ptuto35->Ptuto36->Ptuto37->Ptuto38->Ptuto39->Ptuto40->Ptuto41->Ptuto42->Ptuto43->Ptuto44->Ptuto45->Ptuto46->Ptuto47
+
+}
+}

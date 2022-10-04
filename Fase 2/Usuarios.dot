@@ -1,0 +1,33 @@
+
+
+
+
+
+digraph G {
+label="Lista de Usuarios";
+node [shape=box];
+//agregar nodos
+UJUAN[label="JUAN"];
+Upablo[label="pablo"];
+Ujose[label="jose"];
+Uedgar[label="edgar"];
+Upepe[label="pepe"];
+Udaniel[label="daniel"];
+Uoscar[label="oscar"];
+UJUAN[label="JUAN"];
+Upablo[label="pablo"];
+Ujose[label="jose"];
+Urol[label="rol"];
+Uedgar[label="edgar"];
+Upepe[label="pepe"];
+Udaniel[label="daniel"];
+Uoscar[label="oscar"];
+//Enlazar imagenes
+{rank=same;
+UJUAN->Upablo->Ujose->Uedgar->Upepe->Udaniel->Uoscar->UJUAN->Upablo->Ujose->Urol->Uedgar->Upepe->Udaniel->Uoscar
+Uoscar->Udaniel->Upepe->Uedgar->Urol->Ujose->Upablo->UJUAN->Uoscar->Udaniel->Upepe->Uedgar->Ujose->Upablo->UJUAN
+UJUAN->Uoscar
+Uoscar->UJUAN
+
+}
+}

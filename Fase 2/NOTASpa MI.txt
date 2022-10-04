@@ -1,0 +1,11 @@
+Compilar el C++
+g++ nombre_del_archivo.cpp -o nombre_que_tendra_el_exe
+g++ main.cpp -o main
+
+Exectuar el Exe 
+./nombre_del_archivo.exe
+./main.exe
+
+// Poner todos los headers y todos los include del cpp y h que usara el archivo para que no tire error
+
+CHAR con comillas simples ''
