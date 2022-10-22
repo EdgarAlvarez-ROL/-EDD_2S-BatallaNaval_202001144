@@ -1,0 +1,109 @@
+
+
+
+digraph G {
+label="Campo de J2";
+node [shape=box, style=filled, fontsize="30pt", fontname="Arial"];
+//agregar nodos
+LA[label="A", group = 1];
+U1[label="S", group = 2, fillcolor=pink];
+U2[label="S", group = 3, fillcolor=pink];
+U3[label="S", group = 4, fillcolor=pink];
+N1[label="1", group = 2];
+LB[label="B", group = 1];
+U4[label="B", group = 4, fillcolor=yellow];
+U5[label="D", group = 5, fillcolor=orange];
+U6[label="D", group = 9, fillcolor=orange];
+U7[label="D", group = 10, fillcolor=orange];
+N2[label="2", group = 3];
+LC[label="C", group = 1];
+U8[label="B", group = 3, fillcolor=yellow];
+U9[label="D", group = 5, fillcolor=orange];
+N3[label="3", group = 4];
+LD[label="D", group = 1];
+N4[label="4", group = 5];
+LE[label="E", group = 1];
+U10[label="S", group = 6, fillcolor=pink];
+N5[label="5", group = 6];
+LF[label="F", group = 1];
+U11[label="S", group = 6, fillcolor=pink];
+N6[label="6", group = 7];
+LG[label="G", group = 1];
+U12[label="S", group = 6, fillcolor=pink];
+U13[label="B", group = 8, fillcolor=yellow];
+U14[label="B", group = 10, fillcolor=yellow];
+N7[label="7", group = 8];
+LH[label="H", group = 1];
+U15[label="D", group = 2, fillcolor=orange];
+U16[label="P", group = 6, fillcolor=green];
+U17[label="P", group = 7, fillcolor=green];
+U18[label="P", group = 8, fillcolor=green];
+U19[label="P", group = 9, fillcolor=green];
+N8[label="8", group = 9];
+LI[label="I", group = 1];
+U20[label="D", group = 2, fillcolor=orange];
+N9[label="9", group = 10];
+LJ[label="J", group = 1];
+N10[label="10", group = 11];
+O[label="NODO [0,0]" , group = 1];
+
+//Enlazar imagenes
+O->LA
+O->N1
+LA->LB->LC->LD->LE->LF->LG->LH->LI->LJ
+N1->N2->N3->N4->N5->N6->N7->N8->N9->N10
+{ rank = same; O; N1; N2; N3; N4; N5; N6; N7; N8; N9; N10}
+LA->U1->U2->U3
+LB->U4->U5->U6->U7
+LC->U8->U9
+LD
+LE->U10
+LF->U11
+LG->U12->U13->U14
+LH->U15->U16->U17->U18->U19
+LI->U20
+LJ
+
+N1->U1
+N2->U2
+N3->U3
+U4
+N4->U5
+N8->U6
+N9->U7
+U8
+U9
+N5->U10
+U11
+U12
+N7->U13
+U14
+U15
+U16
+N6->U17
+U18
+U19
+U20
+U1->U15->U20
+U2->U8
+U3->U4
+U5->U9
+U10->U11->U12->U16
+U17
+U13->U18
+U6->U19
+U7->U14
+
+//MISMO RANGO Horiznotal
+{ rank = same; LA; U1; U2; U3; }
+{ rank = same; LB; U4; U5; U6; U7; }
+{ rank = same; LC; U8; U9; }
+{ rank = same; LD; }
+{ rank = same; LE; U10; }
+{ rank = same; LF; U11; }
+{ rank = same; LG; U12; U13; U14; }
+{ rank = same; LH; U15; U16; U17; U18; U19; }
+{ rank = same; LI; U20; }
+{ rank = same; LJ; }
+
+}

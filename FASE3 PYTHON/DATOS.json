@@ -1,0 +1,38 @@
+{
+"usuarios": [
+{ "nick": "JUAN", "password": "juan", "monedas": "1", "edad": "11" },
+{ "nick": "pablo", "password": "pablo", "monedas": "2", "edad": "22" },
+{ "nick": "jose", "password": "jose", "monedas": "0", "edad": "33" },
+{ "nick": "rol", "password": "rol", "monedas": "2222", "edad": "44" },
+{ "nick": "edgar", "password": "edgar", "monedas": "4", "edad": "44" },
+{ "nick": "pepe", "password": "pepe", "monedas": "50", "edad": "12" },
+{ "nick": "daniel", "password": "sinto", "monedas": "10", "edad": "20" },
+{ "nick": "oscar", "password": "oscar", "monedas": "10", "edad": "20" }
+],
+"articulos": [
+{ "id": "1", "categoria": "Legendario", "precio": "4444", "nombre": "Caja", "src": "s" },
+{ "id": "2", "categoria": "Normal", "precio": "21", "nombre": "Espada", "src": "s" },
+{ "id": "3", "categoria": "Comun", "precio": "2", "nombre": "Hoja", "src": "s" },
+{ "id": "4", "categoria": "Raro", "precio": "215", "nombre": "Agua", "src": "s" },
+{ "id": "5", "categoria": "Epico", "precio": "284", "nombre": "Grial", "src": "s" },
+{ "id": "6", "categoria": "Legendario", "precio": "11", "nombre": "Arco", "src": "s" },
+{ "id": "7", "categoria": "Legendario", "precio": "211", "nombre": "Martillo", "src": "s" },
+{ "id": "8", "categoria": "Legendario", "precio": "717", "nombre": "Tridente", "src": "s" },
+{ "id": "9", "categoria": "Comun", "precio": "31", "nombre": "Cubierto", "src": "s" },
+{ "id": "10", "categoria": "Epico", "precio": "85", "nombre": "Teclado", "src": "s" },
+{ "id": "11", "categoria": "Legendario", "precio": "41", "nombre": "Compu", "src": "s" },
+{ "id": "12", "categoria": "Raro", "precio": "s1", "nombre": "Avion", "src": "s" }
+],
+"tutorial": {
+"ancho":"4",
+"alto":"4",
+"movimientos":[
+{ "x": "1", "y": "2" },
+{ "x": "3", "y": "4" },
+{ "x": "8", "y": "6" },
+{ "x": "5", "y": "8" },
+{ "x": "2", "y": "9" },
+{ "x": "9", "y": "1" }
+]
+}
+}
