@@ -1,4 +1,4 @@
-from ast import Pass
+from ast import Pass, Str
 from importlib.metadata import entry_points
 from logging import root
 from multiprocessing import BufferTooShort
@@ -14,7 +14,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox, ttk, PhotoImage
-from tkinter import messagebox as mb
+from tkinter import messagebox as MessageBox
 
 from tkinter.ttk import *
 
@@ -38,7 +38,7 @@ SUBMARINO = "S"  # Ocupa una celda
 DESTRUCTOR = "D"  # Ocupa dos celdas
 PRUEBA = "P"
 DESTRUCTOR_VERTICAL = "A"  # Ocupa dos celdas
-DISPARO_FALLADO = "-"
+DISPARO_FALLADO = "X" #ESTE ERA MENOS "-"
 DISPARO_ACERTADO = "X"
 DISPAROS_INICIALES = 2
 CANTIDAD_BARCOS_INICIALES = 1
@@ -68,11 +68,12 @@ photo = PhotoImage(file = "grafos/matrizDispersa2.txt.png")
 photo_subsambple2 = photo.subsample(3,3)
 
 matriz_j1 = []
-
+matriz_j2 = []
+turno_actual = "J1"
 
 # Funciones para los Botones
 def pagv_juego():
-    global matriz_j1
+    global matriz_j1, matriz_j2, turno_actual
     # global photo3, photo_subsambple, photo, photo_subsambple2
     v_juego = Toplevel()
     v_juego.geometry("1000x600")
@@ -82,7 +83,7 @@ def pagv_juego():
 
     
     def nCuadricula(): 
-        global matriz_j1
+        global matriz_j1, matriz_j2
         m = int(caja1.get())
         if (m<10):
             etiqueta['text'] = "Las dimensiones del tablero deben ser mayores a 10"
@@ -105,7 +106,6 @@ def pagv_juego():
             generarGrafo(matriz_j1,JUGADOR_1)
             generarGrafo(matriz_j2,JUGADOR_2)
 
-            # matrizJ1_TEMP = matriz_j1
 
             photo = PhotoImage(file = "grafos/matrizDispersa1.txt.png")
             photo_subsambple = photo.subsample(3,3) 
@@ -116,6 +116,7 @@ def pagv_juego():
             photo_subsambple2 = photo.subsample(3,3)
             lbl_img2.configure(image=photo_subsambple2)
             lbl_img2.image=photo_subsambple2
+            MessageBox.showinfo("GANADOR", "EL JUGADOR 2 ES EL JUGADOR INVITADO") # título, mensaje
         elif (m<= 20 and m>10):
             etiqueta['text'] = "Bien"
             nPortaaviones = 2
@@ -142,6 +143,8 @@ def pagv_juego():
             photo_subsambple2 = photo.subsample(3,3)
             lbl_img2.configure(image=photo_subsambple2)
             lbl_img2.image=photo_subsambple2
+
+            MessageBox.showinfo("GANADOR", "EL JUGADOR 2 ES EL JUGADOR INVITADO") # título, mensaje
         elif (m>=20):
             etiqueta['text'] = "Todo Bien"
             b_m = ((m-1)/10)+1
@@ -229,7 +232,7 @@ def pagv_juego():
 
     def disparar(x, y, matriz) -> bool:
         if es_mar(x, y, matriz):
-            # matriz[y][x] = DISPARO_FALLADO
+            matriz[y][x] = DISPARO_FALLADO
             pass
             return False
         # Si ya había disparado antes, se le cuenta como falla igualmente
@@ -241,19 +244,43 @@ def pagv_juego():
 
 
     def iniciar_disparos():
-        turno_actual = JUGADOR_1
-        # print(matrizJ1_TEMP)
-        x, y = solicitar_coordenadas(turno_actual)
-        if x == 99 or y == 99:
-            pass
-        else: 
+        global turno_actual
+        if turno_actual == JUGADOR_2:
+            x, y = solicitar_coordenadas(turno_actual)
             acertado = disparar(x, y, matriz_j1)
+            if acertado:
+                if todos_los_barcos_hundidos(matriz_j1):
+                    MessageBox.showinfo("GANADOR", "EL JUGADOR 2 GANO") # título, mensaje
+                # grafoAdyacencia(matriz_j1,JUGADOR_2)
             print(acertado)
-            # imprimir_matriz(matriz_j1, False,(turno_actual))
-            if acertado == True:
-                # matriz_j1[x][y] = "X"
-                generarGrafo(matriz_j1,JUGADOR_1)
-                
+
+            generarGrafo(matriz_j1,JUGADOR_1)
+            photo = PhotoImage(file = "grafos/matrizDispersa1.txt.png") 
+            photo_subsambple = photo.subsample(3,3)
+            lbl_img.configure(image=photo_subsambple)
+            lbl_img.image=photo_subsambple
+            
+            turno_actual = JUGADOR_1
+            turno_jugadpr['text'] = "TURNO DEL JUGADOR 1"
+        else:
+            x, y = solicitar_coordenadas(turno_actual)
+            acertado = disparar(x, y, matriz_j2)
+            print(acertado)
+            if acertado:
+                if todos_los_barcos_hundidos(matriz_j1):
+                    MessageBox.showinfo("GANADOR", "EL JUGADOR 1 GANO") # título, mensaje
+                grafoAdyacencia(matriz_j2,JUGADOR_1)
+
+            generarGrafo(matriz_j2,JUGADOR_2)
+            photo = PhotoImage(file = "grafos/matrizDispersa2.txt.png") 
+            photo_subsambple2 = photo.subsample(3,3)
+            lbl_img2.configure(image=photo_subsambple2)
+            lbl_img2.image=photo_subsambple2
+            
+            turno_actual = JUGADOR_2
+            turno_jugadpr['text'] = "TURNO DEL JUGADOR 2"
+        # imprimir_matriz(matriz_j1,True,JUGADOR_1)
+        
         print()
     
     
@@ -866,6 +893,51 @@ def generarGrafo(matriz, jugador):
     # grafo.edge(dot)
     # print(dot.source)  
     # grafo.render('test-output/graphCiudad.gv', view=True)
+
+
+def grafoAdyacencia(matriz, jugador):
+    dot = ""
+    dot = dot + "\ndigraph G {\n"
+    dot = dot + "label=\"Campo de " + jugador + "\";\n"
+    dot = dot + "node [shape=box, style=filled, fontsize=\"30pt\", fontname=\"Arial\"];\n"
+
+    dot = dot + "//agregar nodos\n"
+    letra = "A"
+    contador = 1
+    numeroNodo = 1
+    listaGeneral = []
+    minilista = []
+    for y in matriz:
+        dot = dot + "L" + letra + "[label=\""+ letra + "\"" + "" + "];\n"
+        minilista.append(("L"+letra))
+        for x in y:
+            if x =="X":
+                dot = dot + "N" + str(contador) + "[label=\""+ str(contador) + "\"" + "" + "];\n"
+                numeroNodo += 1
+                minilista.append("N"+(str(contador)))
+            contador += 1
+        contador = 1
+        letra = incrementar_letra(letra)
+        listaGeneral.append(minilista)
+        minilista = []
+        
+    dot = dot + "\n" 
+    # print(listaGeneral)
+    for y in listaGeneral:
+        for x in y:
+            dot = dot + x 
+            if y[-1] == x:
+                pass
+            else: 
+                dot = dot + "->"
+        dot = dot + "\n" 
+    
+    dot = "\n" +dot + "\n"  
+    dot = dot + "}\n"
+    print(dot)
+    
+    
+    print()
 
 
 
