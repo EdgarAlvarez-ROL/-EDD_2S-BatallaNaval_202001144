@@ -1,13 +1,13 @@
 {
 "usuarios": [
-{ "nick": "JUAN", "password": "juan", "monedas": "1", "edad": "11" },
-{ "nick": "pablo", "password": "pablo", "monedas": "2", "edad": "22" },
-{ "nick": "jose", "password": "jose", "monedas": "0", "edad": "33" },
-{ "nick": "rol", "password": "rol", "monedas": "2222", "edad": "44" },
-{ "nick": "edgar", "password": "edgar", "monedas": "4", "edad": "44" },
-{ "nick": "pepe", "password": "pepe", "monedas": "50", "edad": "12" },
-{ "nick": "daniel", "password": "sinto", "monedas": "10", "edad": "20" },
-{ "nick": "oscar", "password": "oscar", "monedas": "10", "edad": "20" }
+{ "id": 1, "nick": "JUAN", "password": "juan", "monedas": "1", "edad": "11" },
+{ "id": 2, "nick": "pablo", "password": "pablo", "monedas": "2", "edad": "22" },
+{ "id": 3, "nick": "jose", "password": "jose", "monedas": "0", "edad": "33" },
+{ "id": 4, "nick": "rol", "password": "rol", "monedas": "2222", "edad": "44" },
+{ "id": 5, "nick": "edgar", "password": "edgar", "monedas": "4", "edad": "44" },
+{ "id": 6, "nick": "pepe", "password": "pepe", "monedas": "50", "edad": "12" },
+{ "id": 7, "nick": "daniel", "password": "sinto", "monedas": "10", "edad": "20" },
+{ "id": 8, "nick": "oscar", "password": "oscar", "monedas": "10", "edad": "20" }
 ],
 "articulos": [
 { "id": "1", "categoria": "Legendario", "precio": "4444", "nombre": "Caja", "src": "s" },

@@ -8,42 +8,41 @@ node [shape=box, style=filled, fontsize="30pt", fontname="Arial"];
 LA[label="A", group = 1];
 U1[label="X", group = 2, fillcolor=black];
 U2[label="X", group = 3, fillcolor=black];
-U3[label="B", group = 5, fillcolor=yellow];
+U3[label="B", group = 11, fillcolor=yellow];
 N1[label="1", group = 2];
 LB[label="B", group = 1];
-U4[label="S", group = 6, fillcolor=pink];
 N2[label="2", group = 3];
 LC[label="C", group = 1];
-U5[label="D", group = 5, fillcolor=orange];
-U6[label="S", group = 6, fillcolor=pink];
 N3[label="3", group = 4];
 LD[label="D", group = 1];
-U7[label="D", group = 5, fillcolor=orange];
+U4[label="P", group = 2, fillcolor=green];
+U5[label="P", group = 3, fillcolor=green];
+U6[label="P", group = 4, fillcolor=green];
+U7[label="P", group = 5, fillcolor=green];
 U8[label="S", group = 6, fillcolor=pink];
+U9[label="S", group = 7, fillcolor=pink];
+U10[label="S", group = 8, fillcolor=pink];
 N4[label="4", group = 5];
 LE[label="E", group = 1];
-U9[label="X", group = 2, fillcolor=black];
+U11[label="D", group = 4, fillcolor=orange];
+U12[label="D", group = 11, fillcolor=orange];
 N5[label="5", group = 6];
 LF[label="F", group = 1];
-U10[label="S", group = 3, fillcolor=pink];
-U11[label="S", group = 4, fillcolor=pink];
-U12[label="S", group = 5, fillcolor=pink];
+U13[label="D", group = 4, fillcolor=orange];
+U14[label="D", group = 11, fillcolor=orange];
 N6[label="6", group = 7];
 LG[label="G", group = 1];
-U13[label="D", group = 6, fillcolor=orange];
-U14[label="D", group = 7, fillcolor=orange];
-U15[label="B", group = 11, fillcolor=yellow];
+U15[label="B", group = 3, fillcolor=yellow];
+U16[label="S", group = 4, fillcolor=pink];
 N7[label="7", group = 8];
 LH[label="H", group = 1];
-U16[label="B", group = 2, fillcolor=yellow];
-U17[label="D", group = 7, fillcolor=orange];
+U17[label="B", group = 3, fillcolor=yellow];
+U18[label="S", group = 4, fillcolor=pink];
 N8[label="8", group = 9];
 LI[label="I", group = 1];
-U18[label="P", group = 2, fillcolor=green];
-U19[label="P", group = 3, fillcolor=green];
-U20[label="P", group = 4, fillcolor=green];
-U21[label="P", group = 5, fillcolor=green];
-U22[label="D", group = 7, fillcolor=orange];
+U19[label="S", group = 4, fillcolor=pink];
+U20[label="D", group = 10, fillcolor=orange];
+U21[label="D", group = 11, fillcolor=orange];
 N9[label="9", group = 10];
 LJ[label="J", group = 1];
 N10[label="10", group = 11];
@@ -56,58 +55,57 @@ LA->LB->LC->LD->LE->LF->LG->LH->LI->LJ
 N1->N2->N3->N4->N5->N6->N7->N8->N9->N10
 { rank = same; O; N1; N2; N3; N4; N5; N6; N7; N8; N9; N10}
 LA->U1->U2->U3
-LB->U4
-LC->U5->U6
-LD->U7->U8
-LE->U9
-LF->U10->U11->U12
-LG->U13->U14->U15
-LH->U16->U17
-LI->U18->U19->U20->U21->U22
+LB
+LC
+LD->U4->U5->U6->U7->U8->U9->U10
+LE->U11->U12
+LF->U13->U14
+LG->U15->U16
+LH->U17->U18
+LI->U19->U20->U21
 LJ
 
 N1->U1
 N2->U2
-N4->U3
-N5->U4
+N10->U3
+U4
 U5
-U6
-U7
-U8
-U9
-U10
-N3->U11
+N3->U6
+N4->U7
+N5->U8
+N6->U9
+N7->U10
+U11
 U12
 U13
-N6->U14
-N10->U15
+U14
+U15
 U16
 U17
 U18
 U19
-U20
+N9->U20
 U21
-U22
-U1->U9->U16->U18
-U2->U10->U19
-U11->U20
-U3->U5->U7->U12->U21
-U4->U6->U8->U13
-U14->U17->U22
+U1->U4
+U2->U5->U15->U17
+U6->U11->U13->U16->U18->U19
+U7
+U8
+U9
+U10
 
-
-
-U15
+U20
+U3->U12->U14->U21
 //MISMO RANGO Horiznotal
 { rank = same; LA; U1; U2; U3; }
-{ rank = same; LB; U4; }
-{ rank = same; LC; U5; U6; }
-{ rank = same; LD; U7; U8; }
-{ rank = same; LE; U9; }
-{ rank = same; LF; U10; U11; U12; }
-{ rank = same; LG; U13; U14; U15; }
-{ rank = same; LH; U16; U17; }
-{ rank = same; LI; U18; U19; U20; U21; U22; }
+{ rank = same; LB; }
+{ rank = same; LC; }
+{ rank = same; LD; U4; U5; U6; U7; U8; U9; U10; }
+{ rank = same; LE; U11; U12; }
+{ rank = same; LF; U13; U14; }
+{ rank = same; LG; U15; U16; }
+{ rank = same; LH; U17; U18; }
+{ rank = same; LI; U19; U20; U21; }
 { rank = same; LJ; }
 
 }

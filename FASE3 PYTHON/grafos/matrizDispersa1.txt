@@ -2,50 +2,50 @@
 
 
 digraph G {
-label="Campo de J1";
+label="Campo de Hoover9876";
 node [shape=box, style=filled, fontsize="30pt", fontname="Arial"];
 //agregar nodos
 LA[label="A", group = 1];
 U1[label="X", group = 2, fillcolor=black];
 U2[label="X", group = 3, fillcolor=black];
+U3[label="B", group = 6, fillcolor=yellow];
 N1[label="1", group = 2];
 LB[label="B", group = 1];
-U3[label="S", group = 6, fillcolor=pink];
-U4[label="S", group = 7, fillcolor=pink];
-U5[label="S", group = 8, fillcolor=pink];
-U6[label="D", group = 10, fillcolor=orange];
-U7[label="D", group = 11, fillcolor=orange];
+U4[label="D", group = 2, fillcolor=orange];
 N2[label="2", group = 3];
 LC[label="C", group = 1];
+U5[label="D", group = 2, fillcolor=orange];
+U6[label="P", group = 6, fillcolor=green];
+U7[label="P", group = 7, fillcolor=green];
+U8[label="P", group = 8, fillcolor=green];
+U9[label="P", group = 9, fillcolor=green];
 N3[label="3", group = 4];
 LD[label="D", group = 1];
-U8[label="P", group = 4, fillcolor=green];
-U9[label="P", group = 5, fillcolor=green];
-U10[label="P", group = 6, fillcolor=green];
-U11[label="P", group = 7, fillcolor=green];
+U10[label="D", group = 7, fillcolor=orange];
 N4[label="4", group = 5];
 LE[label="E", group = 1];
-U12[label="B", group = 6, fillcolor=yellow];
-U13[label="B", group = 7, fillcolor=yellow];
+U11[label="D", group = 7, fillcolor=orange];
+U12[label="B", group = 8, fillcolor=yellow];
 N5[label="5", group = 6];
 LF[label="F", group = 1];
-U14[label="S", group = 9, fillcolor=pink];
+U13[label="B", group = 9, fillcolor=yellow];
 N6[label="6", group = 7];
 LG[label="G", group = 1];
-U15[label="B", group = 3, fillcolor=yellow];
-U16[label="S", group = 9, fillcolor=pink];
-U17[label="B", group = 11, fillcolor=yellow];
+U14[label="S", group = 9, fillcolor=pink];
+U15[label="S", group = 10, fillcolor=pink];
+U16[label="S", group = 11, fillcolor=pink];
 N7[label="7", group = 8];
 LH[label="H", group = 1];
-U18[label="S", group = 9, fillcolor=pink];
-U19[label="D", group = 11, fillcolor=orange];
+U17[label="S", group = 10, fillcolor=pink];
 N8[label="8", group = 9];
 LI[label="I", group = 1];
-U20[label="D", group = 10, fillcolor=orange];
-U21[label="D", group = 11, fillcolor=orange];
+U18[label="D", group = 4, fillcolor=orange];
+U19[label="D", group = 5, fillcolor=orange];
+U20[label="B", group = 6, fillcolor=yellow];
+U21[label="S", group = 10, fillcolor=pink];
 N9[label="9", group = 10];
 LJ[label="J", group = 1];
-U22[label="D", group = 10, fillcolor=orange];
+U22[label="S", group = 10, fillcolor=pink];
 N10[label="10", group = 11];
 O[label="NODO [0,0]" , group = 1];
 
@@ -55,59 +55,59 @@ O->N1
 LA->LB->LC->LD->LE->LF->LG->LH->LI->LJ
 N1->N2->N3->N4->N5->N6->N7->N8->N9->N10
 { rank = same; O; N1; N2; N3; N4; N5; N6; N7; N8; N9; N10}
-LA->U1->U2
-LB->U3->U4->U5->U6->U7
-LC
-LD->U8->U9->U10->U11
-LE->U12->U13
-LF->U14
-LG->U15->U16->U17
-LH->U18->U19
-LI->U20->U21
+LA->U1->U2->U3
+LB->U4
+LC->U5->U6->U7->U8->U9
+LD->U10
+LE->U11->U12
+LF->U13
+LG->U14->U15->U16
+LH->U17
+LI->U18->U19->U20->U21
 LJ->U22
 
 N1->U1
 N2->U2
 N5->U3
-N6->U4
-N7->U5
-N9->U6
-N10->U7
-N3->U8
-N4->U9
+U4
+U5
+U6
+N6->U7
+N7->U8
+N8->U9
 U10
 U11
 U12
 U13
-N8->U14
-U15
-U16
+U14
+N9->U15
+N10->U16
 U17
-U18
-U19
+N3->U18
+N4->U19
 U20
 U21
 U22
-U1
-U2->U15
-U8
-U9
-U3->U10->U12
-U4->U11->U13
-U5
-U14->U16->U18
-U6->U20->U22
-U7->U17->U19->U21
+U1->U4->U5
+U2
+U18
+U19
+U3->U6->U20
+U7->U10->U11
+U8->U12
+U9->U13->U14
+U15->U17->U21->U22
+U16
 //MISMO RANGO Horiznotal
-{ rank = same; LA; U1; U2; }
-{ rank = same; LB; U3; U4; U5; U6; U7; }
-{ rank = same; LC; }
-{ rank = same; LD; U8; U9; U10; U11; }
-{ rank = same; LE; U12; U13; }
-{ rank = same; LF; U14; }
-{ rank = same; LG; U15; U16; U17; }
-{ rank = same; LH; U18; U19; }
-{ rank = same; LI; U20; U21; }
+{ rank = same; LA; U1; U2; U3; }
+{ rank = same; LB; U4; }
+{ rank = same; LC; U5; U6; U7; U8; U9; }
+{ rank = same; LD; U10; }
+{ rank = same; LE; U11; U12; }
+{ rank = same; LF; U13; }
+{ rank = same; LG; U14; U15; U16; }
+{ rank = same; LH; U17; }
+{ rank = same; LI; U18; U19; U20; U21; }
 { rank = same; LJ; U22; }
 
 }

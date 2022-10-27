@@ -1,6 +1,7 @@
 from ast import Pass, Str
 from importlib.metadata import entry_points
 from logging import root
+from msilib.schema import CheckBox, ListBox
 from multiprocessing import BufferTooShort
 from operator import ge
 from pickle import GLOBAL
@@ -28,6 +29,11 @@ from lectorJson import *
 #LISTAS
 import listaUsuarios
 lista_de_usuarios = listaUsuarios.listaDoble()
+
+import listaArticulos
+lista_de_articulos = listaArticulos.listaDoble()
+
+import chequearItems
 
 
 #MATRIZ DISPERSA VARIABLES GLOBALES 
@@ -251,7 +257,8 @@ def pagv_juego():
             if acertado:
                 if todos_los_barcos_hundidos(matriz_j1):
                     MessageBox.showinfo("GANADOR", "EL JUGADOR 2 GANO") # título, mensaje
-                # grafoAdyacencia(matriz_j1,JUGADOR_2)
+                    grafoAdyacencia(matriz_j1,JUGADOR_1)
+
             print(acertado)
 
             generarGrafo(matriz_j1,JUGADOR_1)
@@ -261,7 +268,7 @@ def pagv_juego():
             lbl_img.image=photo_subsambple
             
             turno_actual = JUGADOR_1
-            turno_jugadpr['text'] = "TURNO DEL JUGADOR 1"
+            turno_jugadpr['text'] = "TURNO DEL JUGADOR: " + JUGADOR_1
         else:
             x, y = solicitar_coordenadas(turno_actual)
             acertado = disparar(x, y, matriz_j2)
@@ -269,7 +276,7 @@ def pagv_juego():
             if acertado:
                 if todos_los_barcos_hundidos(matriz_j1):
                     MessageBox.showinfo("GANADOR", "EL JUGADOR 1 GANO") # título, mensaje
-                grafoAdyacencia(matriz_j2,JUGADOR_1)
+                    grafoAdyacencia(matriz_j2,JUGADOR_2)
 
             generarGrafo(matriz_j2,JUGADOR_2)
             photo = PhotoImage(file = "grafos/matrizDispersa2.txt.png") 
@@ -283,6 +290,49 @@ def pagv_juego():
         
         print()
     
+    def ventanaCompras():
+        global turno_actual
+        v_compras = Toplevel()
+        v_compras.geometry("600x600")
+        v_compras.title("v_compras")
+
+        def obtener_seleccion():
+            # Esto es una tupla con los índices (= las posiciones)
+            # de los ítems seleccionados por el usuario.
+            indices = listbox.curselection()
+            messagebox.showinfo(
+                title="Ítems seleccionados",
+                # Obtener el texto de cada ítem seleccionado
+                # y mostrarlos separados por comas.
+                message=", ".join(listbox.get(i) for i in indices)
+            ) 
+            # total['text'] = "TOTAL: " + "numero"
+            precio = 0
+            for i in indices:
+                precio = precio + lista_de_articulos.obtenerPreciosTotal(listbox.get(i))
+            # print(precio)
+            total['text'] = "TOTAL: " + str(precio)
+
+        def comprarArticulos():
+            
+            print()
+
+        # lista_de_articulos.imprimir()
+        articulos  = lista_de_articulos.retornarListaM()
+        # print(m)
+
+        listbox = tk.Listbox(v_compras, width=50,selectmode=tk.EXTENDED)
+        listbox.insert(0,*articulos)
+        listbox.place(x=100,y=100)
+
+        Button(v_compras,text="Confirmar Items a comprar",command=obtener_seleccion).place(x=100,y=360)
+        Button(v_compras,text="Comprar",command=comprarArticulos).place(x=100,y=400)
+        total = ttk.Label(v_compras, text="TOTAL: ")
+        total.place(x=100, y=380)
+
+
+        
+        
     
     
     #Etiquetas 
@@ -312,7 +362,7 @@ def pagv_juego():
     
     
     # BOTONES Y COSAS PARA DISPARAR
-    turno_jugadpr = ttk.Label(v_juego, text="TURNO DEL JUGADOR 1")
+    turno_jugadpr = ttk.Label(v_juego, text="TURNO DEL JUGADOR: "+ JUGADOR_1)
     turno_jugadpr.place(x=10, y=280)
     
     Label(v_juego, text="Ingrese la Letra: ").place(x=10, y=300)
@@ -324,7 +374,7 @@ def pagv_juego():
     coordenada_numero.place(x=120, y=350)
 
     Button(v_juego, text="DISPARAR",command=iniciar_disparos).place(x=10,y=420)
-
+    Button(v_juego, text="COMPRAR ARTICULOS", command=ventanaCompras).place(x=10,y=500)
 
 
     v_juego.protocol("WM_DELETE_WINDOW", regresarPagPrincipal) #CERRAR PESTAÑA Y REGRESAR AL INICIO
@@ -348,14 +398,24 @@ def pagAdmin():
                                                         "*.*")))
         print(filename)
         usuarios = leerJson(filename)
+        # print(usuarios)
         for i in (usuarios["usuarios"]):
-            # insertar_final(Usuario("ROL","1234","44","21"))
-            usuarioA = listaUsuarios.Usuario("","","","")
+            usuarioA = listaUsuarios.Usuario("","","","","")
+            usuarioA.ids = str(i["id"])
             usuarioA.nick = i["nick"]
             usuarioA.password = i["password"]
-            usuarioA.monedas = i["monedas"]
-            usuarioA.edad = i["edad"]
+            usuarioA.monedas = str(i["monedas"])
+            usuarioA.edad = str(i["edad"])
             lista_de_usuarios.insertar_final(usuarioA)
+        
+        for i in (usuarios["articulos"]):
+            articuloA = listaArticulos.Articulo("","","","","")
+            articuloA.id = str(i["id"])
+            articuloA.nombre = i["nombre"]
+            articuloA.categoria = i["categoria"]
+            articuloA.precio = str(i["precio"])
+            articuloA.src = i["src"]
+            lista_de_articulos.insertar_final(articuloA)
 
         # lista_de_usuarios.imprimir()
         lista_de_usuarios.grafo_usuarios()
@@ -402,6 +462,7 @@ def iniciarTodo():
 
 
     def Ingresar():
+        global JUGADOR_1
         nick = caja1.get()
         password =  caja2.get()
         # print(password)
@@ -415,7 +476,7 @@ def iniciarTodo():
             root.withdraw()
         elif lista_de_usuarios.buscar_usuario(nick.strip(),password.strip()):
             # print()
-            JUGADOR_1 = nick.strip()
+            JUGADOR_1 = (nick.strip())
             pagv_juego()
             #Cerrando la Ventana de LOGIN
             root.withdraw()
@@ -934,9 +995,24 @@ def grafoAdyacencia(matriz, jugador):
     
     dot = "\n" +dot + "\n"  
     dot = dot + "}\n"
-    print(dot)
+    # print(dot)
     
     
+    if jugador != JUGADOR_2:
+        fichero = open("grafos/matrizAdyacencia.txt","w")
+        fichero.write(dot)
+        fichero.close()
+        
+        system("dot -Tpng -O grafos/matrizAdyacencia.txt")
+        print()
+    else:
+        fichero = open("grafos/matrizAdyacencia.txt","w")
+        fichero.write(dot)
+        fichero.close()
+        
+        system("dot -Tpng -O grafos/matrizAdyacencia.txt")
+        print()
+
     print()
 
 
