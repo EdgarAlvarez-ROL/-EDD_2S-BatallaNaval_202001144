@@ -1,0 +1,21 @@
+{
+    "INDEX": "0",
+    "TIMESTAMP": "2022-10-30 13:45:07.090465",
+    "NONCE": "136365",
+    "DATA": {
+        "FROM": "wallet",
+        "SKINS": [
+            {
+                "SKIN": "skin",
+                "VALUE": "value"
+            },
+            {
+                "SKIN": "a",
+                "VALUE": "3223"
+            }
+        ]
+    },
+    "PREVIOUSHASH": "0000",
+    "ROOTMERKLE": "",
+    "HASH": "000014f8e4e68b9867fa23d332627366e37bd5e607abe43534ea228a03eb1d1f"
+}

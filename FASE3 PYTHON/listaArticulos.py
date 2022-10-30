@@ -158,6 +158,40 @@ class listaDoble:
         return precio
 
 
+    def obtenerID(self,item):
+        actualNodo = Nodo()
+        actualNodo = self.Inicio
+        # i=0
+        precio = 0
+        if (self.Inicio != None):
+            while(actualNodo != None):
+                # print(str(actualNodo.elemento.id) +" "+ (actualNodo.elemento).nombre)
+                if actualNodo.elemento.nombre == item:
+                    precio = int(actualNodo.elemento.id)
+                actualNodo = actualNodo.siguiente
+                # i+= 1
+        else:
+            print("LISTA VACIA")
+        return precio
+
+
+    def obtenerNombre(self,item):
+        actualNodo = Nodo()
+        actualNodo = self.Inicio
+        # i=0
+        nombre = ""
+        if (self.Inicio != None):
+            while(actualNodo != None):
+                # print(str(actualNodo.elemento.id) +" "+ (actualNodo.elemento).nombre)
+                if actualNodo.elemento.nombre == item:
+                    nombre = (actualNodo.elemento.nombre)
+                actualNodo = actualNodo.siguiente
+                # i+= 1
+        else:
+            print("LISTA VACIA")
+        return nombre
+
+
     def grafo_Articulos(self):
         dot = ""
         dot = dot + "\ndigraph G {\n"

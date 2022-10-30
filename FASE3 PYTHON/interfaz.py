@@ -21,8 +21,9 @@ from tkinter.ttk import *
 
 import random
 import os
+from traceback import print_tb
+from typing import List
 from graphviz import Digraph, Graph
-
 #Otros archivos de la carpeta
 from lectorJson import *
 
@@ -34,6 +35,7 @@ import listaArticulos
 lista_de_articulos = listaArticulos.listaDoble()
 
 import chequearItems
+
 
 
 #MATRIZ DISPERSA VARIABLES GLOBALES 
@@ -50,6 +52,7 @@ DISPAROS_INICIALES = 2
 CANTIDAD_BARCOS_INICIALES = 1
 JUGADOR_1 = "J1"
 JUGADOR_2 = "J2"
+TPRECIO = 0
 
 
 
@@ -76,6 +79,8 @@ photo_subsambple2 = photo.subsample(3,3)
 matriz_j1 = []
 matriz_j2 = []
 turno_actual = "J1"
+HashTable = [[] for _ in range(13)] 
+
 
 # Funciones para los Botones
 def pagv_juego():
@@ -276,6 +281,8 @@ def pagv_juego():
             if acertado:
                 if todos_los_barcos_hundidos(matriz_j1):
                     MessageBox.showinfo("GANADOR", "EL JUGADOR 1 GANO") # título, mensaje
+                    """suma de puntos
+                    # lista_de_usuarios.restaYsumaPrecio(JUGADOR_1,TPRECIO,0) """
                     grafoAdyacencia(matriz_j2,JUGADOR_2)
 
             generarGrafo(matriz_j2,JUGADOR_2)
@@ -290,13 +297,16 @@ def pagv_juego():
         
         print()
     
+
     def ventanaCompras():
-        global turno_actual
+        global turno_actual, nick
         v_compras = Toplevel()
         v_compras.geometry("600x600")
         v_compras.title("v_compras")
+        
 
         def obtener_seleccion():
+            global HashTable, TPRECIO
             # Esto es una tupla con los índices (= las posiciones)
             # de los ítems seleccionados por el usuario.
             indices = listbox.curselection()
@@ -310,11 +320,35 @@ def pagv_juego():
             precio = 0
             for i in indices:
                 precio = precio + lista_de_articulos.obtenerPreciosTotal(listbox.get(i))
+                id = lista_de_articulos.obtenerID(listbox.get(i))
+                # comprarArticulos(id, listbox.get(i))
+                insert(HashTable, id, listbox.get(i))
             # print(precio)
             total['text'] = "TOTAL: " + str(precio)
+            TPRECIO = precio
+            display_hash(HashTable)
 
-        def comprarArticulos():
-            
+        def eliminardelHash():
+            global HashTable
+            indices = listbox.curselection()
+
+            for i in indices:
+                delete_in_hash(HashTable, listbox.get(i))
+            display_hash(HashTable)
+
+
+        def confirmarCompra():
+            # global nick
+            print(JUGADOR_1)
+            print(TPRECIO)
+            """AQUI SE DEBE HACER LO DE CREAR EL BLOQUE Y METERLO AL ARBOL MERKLE"""
+            lista_de_usuarios.restaYsumaPrecio(JUGADOR_1,TPRECIO,1)
+            lista_de_usuarios.imprimir()
+            # print()
+
+        def verGrafico_de_compras():
+            global HashTable
+            grafoTablaHash()
             print()
 
         # lista_de_articulos.imprimir()
@@ -325,8 +359,11 @@ def pagv_juego():
         listbox.insert(0,*articulos)
         listbox.place(x=100,y=100)
 
-        Button(v_compras,text="Confirmar Items a comprar",command=obtener_seleccion).place(x=100,y=360)
-        Button(v_compras,text="Comprar",command=comprarArticulos).place(x=100,y=400)
+        Button(v_compras,text="Seleccionar Articulos",command=obtener_seleccion).place(x=100,y=360)
+        Button(v_compras,text="Eliminar Articulos",command=eliminardelHash).place(x=100,y=400)
+        Button(v_compras,text="Confirmar COMPRA",command=confirmarCompra).place(x=100,y=440)
+        Button(v_compras,text="Generar Grafico",command=verGrafico_de_compras).place(x=340,y=440)
+
         total = ttk.Label(v_compras, text="TOTAL: ")
         total.place(x=100, y=380)
 
@@ -423,15 +460,29 @@ def pagAdmin():
     def regresar_al_inicio():
         v_admiin.destroy()
         root.deiconify()
-        # iniciarTodo()
-        
 
-    Button(v_admiin, text="Ver objetos en el sistema").place(x=50,y=50)
-    Button(v_admiin, text="Ver usuarios en el sistema").place(x=50,y=200)
+    def generarPT():
+        escribir_json(nCeros.get())
+    
+    Label(v_admiin,text="PRUEBA DE TRABAJO").place(x=20, y=20)
+    Label(v_admiin,text="Numero de Ceros para el Prefijo").place(x=20, y=50)
+    nCeros = ttk.Entry(v_admiin)
+    nCeros.place(x=20, y=100)
+    Button(v_admiin, text="Generar Prueba de Trabajo", command=generarPT).place(x=20,y=160)
+
+
+    Label(v_admiin,text="TIEMPO PARA LA CREACION DE BLOQUES").place(x=300, y=20)
+    nTiempo = ttk.Entry(v_admiin)
+    nTiempo.place(x=300, y=80)
+    Button(v_admiin, text="Modificar Tiempo").place(x=300,y=100)
+    Button(v_admiin, text="Generar Bloque").place(x=300,y=160)
+    
+
     Button(v_admiin, text="leer JSON",command=v_a_leerJson).place(x=50,y=320)
-    Button(v_admiin, text="REGRESAR",command=regresar_al_inicio).place(x=220,y=20)
+    # Button(v_admiin, text="REGRESAR",command=regresar_al_inicio).place(x=400,y=20)
 
-   
+    v_admiin.protocol("WM_DELETE_WINDOW", regresar_al_inicio) #CERRAR PESTAÑA Y REGRESAR AL INICIO
+
 
 def iniciarTodo():
     
@@ -1014,6 +1065,78 @@ def grafoAdyacencia(matriz, jugador):
         print()
 
     print()
+
+
+def display_hash(hashTable): 
+      
+    for i in range(len(hashTable)): 
+        print(i, end = " ") 
+          
+        for j in hashTable[i]: 
+            print("-->", end = " ") 
+            print(j, end = " ") 
+              
+        print() 
+  
+
+def Hashing(keyvalue): 
+    return keyvalue % len(HashTable) 
+  
+  
+def insert(Hashtable, keyvalue, value): 
+    
+    hash_key = Hashing(keyvalue) 
+    Hashtable[hash_key].append(value) 
+
+def delete_in_hash(hashTable, x):
+    for i in range(len(hashTable)): 
+        for j in hashTable[i]: 
+            if j == x:
+                # print(x)
+                hashTable[i].remove(x)
+
+def grafoTablaHash():
+    global HashTable
+    dot = ""
+    dot = dot + "\ndigraph G {\n"
+    dot = dot + "label=\"Campo de " + "jugador" + "\";\n"
+    dot = dot + "node [shape=box, style=filled, fontsize=\"30pt\", fontname=\"Arial\"];\n"
+
+    dot = dot + "//agregar nodos\n"
+
+   
+    dot = dot + """a0 [shape=none label=<
+ <TABLE border="0" cellspacing="10" cellpadding="10" style="rounded" gradientangle="315">
+  <TR>
+  <TD>Indice</TD>
+  <TD >ID</TD>
+  <TD >NOMBRE</TD>
+  </TR>"""
+
+   
+    for i in range(len(HashTable)): 
+        # print(i, end = " ") 
+        
+          
+        for j in HashTable[i]: 
+            dot = dot + "<TR><TD>" + str(i) + "</TD>"
+            # print("-->", end = " ") 
+            id = lista_de_articulos.obtenerID(j)
+            dot = dot + "<TD>" + str(id) + "</TD>"
+            # print(j, end = " ") 
+            dot = dot + "<TD>" + j + "</TD>"  + "\n" 
+
+            dot = dot + "</TR>\n"
+  
+
+    dot = dot + """  
+</TABLE>>];
+    """
+
+    dot = dot + "}\n"
+
+    print(dot)
+    
 
 
 

@@ -1,3 +1,4 @@
+from ast import Str
 from mmap import ACCESS_COPY, ALLOCATIONGRANULARITY
 from os import system
 from xml.dom.minidom import Element
@@ -47,7 +48,7 @@ class listaDoble:
         i=0
         if (self.Inicio != None):
             while(actualNodo != None):
-                print(str(i) +" "+ (actualNodo.elemento).nick)
+                print(str(i) +" "+ (actualNodo.elemento).nick + " " + str((actualNodo.elemento).monedas))
                 actualNodo = actualNodo.siguiente
                 i+= 1
         else:
@@ -69,6 +70,35 @@ class listaDoble:
             print("LA LISTA ESTA VACIA")
         
         return encontrado
+
+    def restaYsumaPrecio(self, usuario, precio, opcion):
+        if opcion == 1:
+            actual = Nodo()
+            actual = self.Inicio
+            encontrado = 0
+            nickUser = usuario
+            
+            if (self.Inicio != None):
+                while (actual != None and encontrado != 1):
+                    if (nickUser == actual.elemento.nick):
+                        encontrado = 1
+                        actual.elemento.monedas = str(int(actual.elemento.monedas) - precio)
+                        print(actual.elemento.monedas)
+                    actual = actual.siguiente
+            # resta
+        else:
+            actual = Nodo()
+            actual = self.Inicio
+            encontrado = 0
+            nickUser = usuario
+            
+            if (self.Inicio != None):
+                while (actual != None and encontrado != 1):
+                    if (nickUser == actual.elemento.nick):
+                        encontrado = 1
+                        actual.elemento.monedas = actual.elemento.monedas + precio
+                    actual = actual.siguiente
+            # suma
 
 
     def modificar_usuario(self,nick,password):
