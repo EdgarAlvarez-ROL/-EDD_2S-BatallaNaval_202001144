@@ -1,4 +1,6 @@
 from ast import Pass, Str
+from cProfile import label
+from email import message_from_bytes
 from importlib.metadata import entry_points
 from logging import root
 from msilib.schema import CheckBox, ListBox
@@ -24,6 +26,7 @@ import os
 from traceback import print_tb
 from typing import List
 from graphviz import Digraph, Graph
+from pyrsistent import v
 #Otros archivos de la carpeta
 from lectorJson import *
 
@@ -34,7 +37,7 @@ lista_de_usuarios = listaUsuarios.listaDoble()
 import listaArticulos
 lista_de_articulos = listaArticulos.listaDoble()
 
-import chequearItems
+import wallet
 
 
 
@@ -255,15 +258,17 @@ def pagv_juego():
 
 
     def iniciar_disparos():
-        global turno_actual
+        global turno_actual, barcos_cuatro_celda, barcos_dos_celda, barcos_tres_celda, barcos_una_celda                                                                                                                                                                                                                                                                     
         if turno_actual == JUGADOR_2:
             x, y = solicitar_coordenadas(turno_actual)
             acertado = disparar(x, y, matriz_j1)
             if acertado:
+                puntosJ2['text'] = int(puntosJ2['text']) + 1
+                # lista_de_usuarios.restaYsumaPrecio(JUGADOR_1,TPRECIO,0) 
                 if todos_los_barcos_hundidos(matriz_j1):
                     MessageBox.showinfo("GANADOR", "EL JUGADOR 2 GANO") # título, mensaje
                     grafoAdyacencia(matriz_j1,JUGADOR_1)
-
+                    tablaAdyacenciaGH(matriz_j1,JUGADOR_1)
             print(acertado)
 
             generarGrafo(matriz_j1,JUGADOR_1)
@@ -279,11 +284,14 @@ def pagv_juego():
             acertado = disparar(x, y, matriz_j2)
             print(acertado)
             if acertado:
-                if todos_los_barcos_hundidos(matriz_j1):
+                puntosJ1['text'] = int(puntosJ2['text']) + 1
+                if todos_los_barcos_hundidos(matriz_j2):
                     MessageBox.showinfo("GANADOR", "EL JUGADOR 1 GANO") # título, mensaje
-                    """suma de puntos
-                    # lista_de_usuarios.restaYsumaPrecio(JUGADOR_1,TPRECIO,0) """
+                    """suma de puntos """
+                    TPRECIO = barcos_una_celda + barcos_cuatro_celda + barcos_dos_celda + barcos_tres_celda
+                    lista_de_usuarios.restaYsumaPrecio(JUGADOR_1,TPRECIO,0) 
                     grafoAdyacencia(matriz_j2,JUGADOR_2)
+                    tablaAdyacenciaGH(matriz_j2,JUGADOR_1)
 
             generarGrafo(matriz_j2,JUGADOR_2)
             photo = PhotoImage(file = "grafos/matrizDispersa2.txt.png") 
@@ -293,9 +301,10 @@ def pagv_juego():
             
             turno_actual = JUGADOR_2
             turno_jugadpr['text'] = "TURNO DEL JUGADOR 2"
+           
         # imprimir_matriz(matriz_j1,True,JUGADOR_1)
         
-        print()
+        # print()
     
 
     def ventanaCompras():
@@ -326,7 +335,7 @@ def pagv_juego():
             # print(precio)
             total['text'] = "TOTAL: " + str(precio)
             TPRECIO = precio
-            display_hash(HashTable)
+            # display_hash(HashTable)
 
         def eliminardelHash():
             global HashTable
@@ -334,17 +343,28 @@ def pagv_juego():
 
             for i in indices:
                 delete_in_hash(HashTable, listbox.get(i))
-            display_hash(HashTable)
+            # display_hash(HashTable)
 
 
         def confirmarCompra():
             # global nick
-            print(JUGADOR_1)
-            print(TPRECIO)
+            # print(JUGADOR_1)
+            # print(TPRECIO)
             """AQUI SE DEBE HACER LO DE CREAR EL BLOQUE Y METERLO AL ARBOL MERKLE"""
             lista_de_usuarios.restaYsumaPrecio(JUGADOR_1,TPRECIO,1)
-            lista_de_usuarios.imprimir()
-            # print()
+            walletUser = wallet.obtenerWallet()
+            indices = listbox.curselection()
+            # precio = 0
+            for i in indices:
+                precio = lista_de_articulos.obtenerPreciosTotal(listbox.get(i))
+                id = lista_de_articulos.obtenerID(listbox.get(i))
+                modJson(walletUser, id, precio)
+
+            # lista_de_usuarios.imprimir()
+            messagebox.showinfo(message="VALIDANDO MODIFICACION EN EL ARBOL MERKLE \n VALIDANDO LA CLAVE PRIVADA")
+            messagebox.showinfo(message="COMPRA REALIZADA CON EXITO")
+
+
 
         def verGrafico_de_compras():
             global HashTable
@@ -360,7 +380,7 @@ def pagv_juego():
         listbox.place(x=100,y=100)
 
         Button(v_compras,text="Seleccionar Articulos",command=obtener_seleccion).place(x=100,y=360)
-        Button(v_compras,text="Eliminar Articulos",command=eliminardelHash).place(x=100,y=400)
+        Button(v_compras,text="Eliminar Articulos Seleccionados",command=eliminardelHash).place(x=100,y=400)
         Button(v_compras,text="Confirmar COMPRA",command=confirmarCompra).place(x=100,y=440)
         Button(v_compras,text="Generar Grafico",command=verGrafico_de_compras).place(x=340,y=440)
 
@@ -401,6 +421,15 @@ def pagv_juego():
     # BOTONES Y COSAS PARA DISPARAR
     turno_jugadpr = ttk.Label(v_juego, text="TURNO DEL JUGADOR: "+ JUGADOR_1)
     turno_jugadpr.place(x=10, y=280)
+
+    Label(v_juego, text="Puntos de Jugador: "+ JUGADOR_1 + ": ").place(x=10, y=380)
+    puntosJ1 = ttk.Label(v_juego, text="0")
+    puntosJ1.place(x=140, y=380)
+
+
+    Label(v_juego, text="Puntos de Jugador: "+ JUGADOR_2 + ": ").place(x=10, y=400)
+    puntosJ2 = ttk.Label(v_juego, text="0")
+    puntosJ2.place(x=140, y=400)
     
     Label(v_juego, text="Ingrese la Letra: ").place(x=10, y=300)
     coordenada_letra = ttk.Entry(v_juego)
@@ -410,7 +439,7 @@ def pagv_juego():
     coordenada_numero = ttk.Entry(v_juego)
     coordenada_numero.place(x=120, y=350)
 
-    Button(v_juego, text="DISPARAR",command=iniciar_disparos).place(x=10,y=420)
+    Button(v_juego, text="DISPARAR",command=iniciar_disparos).place(x=10,y=440)
     Button(v_juego, text="COMPRAR ARTICULOS", command=ventanaCompras).place(x=10,y=500)
 
 
@@ -478,7 +507,7 @@ def pagAdmin():
     Button(v_admiin, text="Generar Bloque").place(x=300,y=160)
     
 
-    Button(v_admiin, text="leer JSON",command=v_a_leerJson).place(x=50,y=320)
+    Button(v_admiin, text="Leer JSON",command=v_a_leerJson).place(x=280,y=320)
     # Button(v_admiin, text="REGRESAR",command=regresar_al_inicio).place(x=400,y=20)
 
     v_admiin.protocol("WM_DELETE_WINDOW", regresar_al_inicio) #CERRAR PESTAÑA Y REGRESAR AL INICIO
@@ -542,8 +571,11 @@ def iniciarTodo():
 
     #Botones
     Button(root, text="INGRESAR", command=Ingresar).place(x=200,y=300)
+    def mensajeAlSalir():
+        messagebox.showinfo(title="BARCOS 202001144", message="GRACIAS POR JUGAR, GUARDANDO INSTANCIAS REALIZADAS")
+        root.destroy()
 
-
+    root.protocol("WM_DELETE_WINDOW", mensajeAlSalir) #CERRAR PESTAÑA Y ENVIANDO MENSAJE DE GUARDADO DE INSTANCIAS
     root.mainloop()
 
 
@@ -1065,6 +1097,84 @@ def grafoAdyacencia(matriz, jugador):
         print()
 
     print()
+
+
+def tablaAdyacenciaGH(matriz, jugador):
+    dot = ""
+    dot = dot + "\ndigraph G {\n"
+    dot = dot + "label=\"TABLA HASH de " + jugador + "\";\n"
+    dot = dot + "node [shape=box, style=filled, fontsize=\"30pt\", fontname=\"Arial\"];\n"
+
+    dot = dot + "//agregar nodos\n"
+    dot = dot + "e0[shape = point, width = 0];"
+    
+    letra = "A"
+    contador = 1
+    contador2 = 1
+    numeroNodo = 1
+    contadorColum = 0
+    listaGeneral = []
+    minilista = []
+    for y in matriz:
+        dot = dot + "L" + letra + "[label=\""+ letra + "\"" + ", group = " + str(contadorColum+1) + "];\n"
+        minilista.append(("L"+letra))
+        for x in y:
+            if x =="X":
+                dot = dot + "N" + str(contador) + "[label=\""+ str(contador2) + "\"" + ", group = " + str(contadorColum+1) + "];\n"
+                numeroNodo += 1
+                minilista.append("N"+(str(contador)))
+                contador += 1
+            contador2 += 1
+        contadorColum += 1
+        contador2 = 1
+        letra = incrementar_letra(letra)
+        listaGeneral.append(minilista)
+        minilista = []
+
+
+
+
+    for y in listaGeneral:
+        for x in y:
+            dot = dot + x 
+            if y[-1] == x:
+                pass
+            else: 
+                dot = dot + "->"
+        
+        dot = dot + "\n"
+    
+    for y in listaGeneral:
+        dot = dot + y[0] + "->"
+        
+    dot = dot + "e0"
+    dot = dot + "\n"
+
+    for y in listaGeneral:
+        dot = dot + "{ rank = same; "
+        for x in y:
+            dot = dot + x
+            if y[-1] == x:
+                pass
+            else: 
+                dot = dot + ";"
+        dot = dot + "}\n"
+
+            
+            
+        
+        dot = dot + "\n"
+    
+    dot = dot + "}\n"
+
+    # print(listaGeneral)
+    # print(dot)
+
+    fichero = open("grafos/tablaAdyacencia.txt","w")
+    fichero.write(dot)
+    fichero.close()
+    
+    system("dot -Tpng -O grafos/tablaAdyacencia.txt")
 
 
 def display_hash(hashTable): 

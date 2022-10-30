@@ -1,0 +1,50 @@
+
+
+digraph G {
+label="Campo de J2";
+node [shape=box, style=filled, fontsize="30pt", fontname="Arial"];
+//agregar nodos
+LA[label="A"];
+N2[label="2"];
+N4[label="4"];
+LB[label="B"];
+N2[label="2"];
+N4[label="4"];
+N5[label="5"];
+N6[label="6"];
+LC[label="C"];
+N2[label="2"];
+N5[label="5"];
+N9[label="9"];
+N10[label="10"];
+LD[label="D"];
+N9[label="9"];
+LE[label="E"];
+LF[label="F"];
+N7[label="7"];
+N8[label="8"];
+N9[label="9"];
+N10[label="10"];
+LG[label="G"];
+N1[label="1"];
+N2[label="2"];
+N3[label="3"];
+LH[label="H"];
+N8[label="8"];
+N9[label="9"];
+LI[label="I"];
+N9[label="9"];
+LJ[label="J"];
+
+LA->N2->N4
+LB->N2->N4->N5->N6
+LC->N2->N5->N9->N10
+LD->N9
+LE
+LF->N7->N8->N9->N10
+LG->N1->N2->N3
+LH->N8->N9
+LI->N9
+LJ
+
+}

@@ -1,0 +1,67 @@
+
+digraph G {
+label="TABLA HASH de J1";
+node [shape=box, style=filled, fontsize="30pt", fontname="Arial"];
+//agregar nodos
+e0[shape = point, width = 0];LA[label="A", group = 1];
+N1[label="2", group = 1];
+N2[label="4", group = 1];
+LB[label="B", group = 2];
+N3[label="2", group = 2];
+N4[label="4", group = 2];
+N5[label="5", group = 2];
+N6[label="6", group = 2];
+LC[label="C", group = 3];
+N7[label="2", group = 3];
+N8[label="5", group = 3];
+N9[label="9", group = 3];
+N10[label="10", group = 3];
+LD[label="D", group = 4];
+N11[label="9", group = 4];
+LE[label="E", group = 5];
+LF[label="F", group = 6];
+N12[label="7", group = 6];
+N13[label="8", group = 6];
+N14[label="9", group = 6];
+N15[label="10", group = 6];
+LG[label="G", group = 7];
+N16[label="1", group = 7];
+N17[label="2", group = 7];
+N18[label="3", group = 7];
+LH[label="H", group = 8];
+N19[label="8", group = 8];
+N20[label="9", group = 8];
+LI[label="I", group = 9];
+LJ[label="J", group = 10];
+LA->N1->N2
+LB->N3->N4->N5->N6
+LC->N7->N8->N9->N10
+LD->N11
+LE
+LF->N12->N13->N14->N15
+LG->N16->N17->N18
+LH->N19->N20
+LI
+LJ
+LA->LB->LC->LD->LE->LF->LG->LH->LI->LJ->e0
+{ rank = same; LA;N1;N2}
+
+{ rank = same; LB;N3;N4;N5;N6}
+
+{ rank = same; LC;N7;N8;N9;N10}
+
+{ rank = same; LD;N11}
+
+{ rank = same; LE}
+
+{ rank = same; LF;N12;N13;N14;N15}
+
+{ rank = same; LG;N16;N17;N18}
+
+{ rank = same; LH;N19;N20}
+
+{ rank = same; LI}
+
+{ rank = same; LJ}
+
+}

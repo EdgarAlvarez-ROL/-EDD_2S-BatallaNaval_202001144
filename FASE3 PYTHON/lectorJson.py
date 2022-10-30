@@ -92,11 +92,11 @@ def modJson(wallet, skin, value):
         payloads = json.load(f)
 
     # payloads['DATA'] = {}
-    payloads['DATA']['FROM'] = (wallet)
+    payloads['DATA']['FROM'] = wallet
     # payloads['DATA']['SKINS'] = []
     payloads['DATA']['SKINS'].append({
-        "SKIN": skin,
-        "VALUE": value
+        "SKIN": str(skin),
+        "VALUE": str(value)
     })
 
     with open('blockchain/bloque.json', 'w') as file:
