@@ -38,6 +38,10 @@ import listaArticulos
 lista_de_articulos = listaArticulos.listaDoble()
 
 import wallet
+import hashID
+import arbolMerkle
+
+arbol = arbolMerkle.Arbol("")
 
 
 
@@ -350,26 +354,36 @@ def pagv_juego():
             # global nick
             # print(JUGADOR_1)
             # print(TPRECIO)
+            # Generar Roomerkle osea nodo padre
+            
             """AQUI SE DEBE HACER LO DE CREAR EL BLOQUE Y METERLO AL ARBOL MERKLE"""
             lista_de_usuarios.restaYsumaPrecio(JUGADOR_1,TPRECIO,1)
             walletUser = wallet.obtenerWallet()
             indices = listbox.curselection()
             # precio = 0
+            data = ""
             for i in indices:
                 precio = lista_de_articulos.obtenerPreciosTotal(listbox.get(i))
                 id = lista_de_articulos.obtenerID(listbox.get(i))
                 modJson(walletUser, id, precio)
+                data = data + str(id) + str(precio)
+            
+            roomerkle = hashID.hash_ID(data)
+            modRoomerkle(roomerkle)
+            arbol = arbolMerkle.Arbol(roomerkle)
+            arbol.agregar(walletUser)
+
 
             # lista_de_usuarios.imprimir()
             messagebox.showinfo(message="VALIDANDO MODIFICACION EN EL ARBOL MERKLE \n VALIDANDO LA CLAVE PRIVADA")
             messagebox.showinfo(message="COMPRA REALIZADA CON EXITO")
+            arbol.postorden()
 
 
 
         def verGrafico_de_compras():
             global HashTable
             grafoTablaHash()
-            print()
 
         # lista_de_articulos.imprimir()
         articulos  = lista_de_articulos.retornarListaM()

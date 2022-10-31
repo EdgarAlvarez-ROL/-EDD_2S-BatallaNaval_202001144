@@ -1,13 +1,11 @@
 from hashlib import sha256
+from sys import prefix
 
-def prueba_de_Trabajo(date, prefijo):
-    index = 0
-    roomerkle = ""
-    # nonce = "0"
-    Data= str(index) + date + "0000" + roomerkle
-    CadenaEvaludada=""
-    nonce=0
+def hash_ID(Data):
+    # Data
     # prefijo="0000"
+    nonce = 0
+    prefijo = "0000"
 
     while True:
         nonce += 1
@@ -18,4 +16,4 @@ def prueba_de_Trabajo(date, prefijo):
             CadenaEvaludada = sha256(CadenaEvaludada.encode('utf-8')).hexdigest()
             break;
     
-    return nonce, CadenaEvaludada
+    return CadenaEvaludada

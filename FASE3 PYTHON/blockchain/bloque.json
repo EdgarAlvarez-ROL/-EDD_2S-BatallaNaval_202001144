@@ -1,29 +1,13 @@
 {
     "INDEX": "0",
-    "TIMESTAMP": "2022-10-30 16:14:28.240237",
-    "NONCE": "26145",
+    "TIMESTAMP": "2022-10-30 20:15:51.327580",
+    "NONCE": "127",
     "DATA": {
-        "FROM": "0x8626506E73085192FcE4161e27EaBa72A60b6b3a",
+        "FROM": "0xD248b9B3122A7430549A3802a1d53aa391159B9A",
         "SKINS": [
             {
-                "SKIN": "3",
-                "VALUE": "2"
-            },
-            {
-                "SKIN": "4",
-                "VALUE": "215"
-            },
-            {
-                "SKIN": "5",
-                "VALUE": "284"
-            },
-            {
-                "SKIN": "8",
-                "VALUE": "717"
-            },
-            {
-                "SKIN": "745",
-                "VALUE": "26"
+                "SKIN": "570",
+                "VALUE": "33"
             },
             {
                 "SKIN": "902",
@@ -36,26 +20,10 @@
             {
                 "SKIN": "464",
                 "VALUE": "40"
-            },
-            {
-                "SKIN": "3",
-                "VALUE": "2"
-            },
-            {
-                "SKIN": "4",
-                "VALUE": "215"
-            },
-            {
-                "SKIN": "5",
-                "VALUE": "284"
-            },
-            {
-                "SKIN": "8",
-                "VALUE": "717"
             }
         ]
     },
     "PREVIOUSHASH": "0000",
-    "ROOTMERKLE": "",
-    "HASH": "00003c60333332174b49e9f7889707488df001c5e1ce34ef268ef12f4bacd3cb"
+    "ROOTMERKLE": "0000c77ce71c2cd85f162ac21fc243210a020557460e068734665abf4dac9cb3",
+    "HASH": "0020b6cd64096ddf032305451fa18aca89d17744838e32f0496f78b3a0d8f8b1"
 }

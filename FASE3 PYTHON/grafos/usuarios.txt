@@ -7,20 +7,23 @@ digraph G {
 label="Lista de Usuarios";
 node [shape=box];
 //agregar nodos
-UJUAN[label="JUAN"];
-Upablo[label="pablo"];
-Ujose[label="jose"];
 Urol[label="rol"];
-Uedgar[label="edgar"];
-Upepe[label="pepe"];
-Udaniel[label="daniel"];
-Uoscar[label="oscar"];
+USilva5379[label="Silva5379"];
+UGarrett9497[label="Garrett9497"];
+UGillespie2277[label="Gillespie2277"];
+UIsabelle7888[label="Isabelle7888"];
+UPam8878[label="Pam8878"];
+UScott4859[label="Scott4859"];
+UBell4469[label="Bell4469"];
+ULong5198[label="Long5198"];
+ULadonna861[label="Ladonna861"];
+USpence5777[label="Spence5777"];
 //Enlazar imagenes
 {rank=same;
-UJUAN->Upablo->Ujose->Urol->Uedgar->Upepe->Udaniel->Uoscar
-Uoscar->Udaniel->Upepe->Uedgar->Urol->Ujose->Upablo->UJUAN
-UJUAN->Uoscar
-Uoscar->UJUAN
+Urol->USilva5379->UGarrett9497->UGillespie2277->UIsabelle7888->UPam8878->UScott4859->UBell4469->ULong5198->ULadonna861->USpence5777
+USpence5777->ULadonna861->ULong5198->UBell4469->UScott4859->UPam8878->UIsabelle7888->UGillespie2277->UGarrett9497->USilva5379->Urol
+Urol->USpence5777
+USpence5777->Urol
 
 }
 }

@@ -102,7 +102,17 @@ def modJson(wallet, skin, value):
     with open('blockchain/bloque.json', 'w') as file:
         json.dump(payloads, file, indent=4)
 
-    
+
+def modRoomerkle(data):
+    with open('blockchain/bloque.json') as f:
+        payloads = json.load(f)
+
+    # payloads['DATA'] = {}
+    payloads['ROOTMERKLE'] = data
+    # payloads['DATA']['SKINS'] = []
+
+    with open('blockchain/bloque.json', 'w') as file:
+        json.dump(payloads, file, indent=4)
 
 # escribir_json("0000")
 # modJson("wallet", "skin", "value")
